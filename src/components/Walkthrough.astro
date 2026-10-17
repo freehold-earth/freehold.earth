@@ -64,7 +64,7 @@ const received = [
     controls.className = 'controls';
     const counter = document.createElement('p');
     counter.className = 'mono counter';
-    counter.setAttribute('aria-live', 'polite');
+    counter.textContent = `Step 1 of ${steps.length}`;
     const prev = Object.assign(document.createElement('button'), {
       type: 'button',
       textContent: 'Back',
@@ -105,6 +105,8 @@ const received = [
 
     fig.dataset.enhanced = '';
     show(0);
+    // Only announce changes the reader causes, not the initial state.
+    counter.setAttribute('aria-live', 'polite');
   }
 </script>
 

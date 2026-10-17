@@ -113,6 +113,10 @@ svg {
   top: var(--space-4);
 }
 
+.skip-link:focus-visible {
+  outline-color: var(--ink);
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,

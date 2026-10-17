@@ -1,5 +1,6 @@
 // Minimal static server for dist/ that mimics GitHub Pages: directory index.html,
-// extensionless paths, and dist/404.html with a 404 status for anything missing.
+// a 301 to add a missing trailing slash, extensionless .html paths, and
+// dist/404.html with a 404 status for anything missing.
 // Used by Playwright because `astro preview` backgrounds itself under AI agents.
 import { createServer } from 'node:http';
 import { readFile, stat } from 'node:fs/promises';
@@ -19,28 +20,50 @@ const TYPES = {
   '.xml': 'application/xml',
 };
 
-async function resolveFile(urlPath) {
-  const safe = normalize(decodeURIComponent(urlPath)).replace(/^(\.\.[/\\])+/, '');
-  const base = join(ROOT, safe);
-  for (const candidate of [base, join(base, 'index.html'), `${base}.html`]) {
-    try {
-      if ((await stat(candidate)).isFile()) return candidate;
-    } catch {
-      // try next candidate
-    }
+async function isFile(path) {
+  try {
+    return (await stat(path)).isFile();
+  } catch {
+    return false;
   }
+}
+
+// Returns a file to serve, a redirect for directories missing their trailing
+// slash (as GitHub Pages does), or null.
+async function resolve(urlPath) {
+  const safe = normalize(urlPath).replace(/^(\.\.[/\\])+/, '');
+  const base = join(ROOT, safe);
+  if (await isFile(base)) return { file: base };
+  if (await isFile(join(base, 'index.html'))) {
+    return urlPath.endsWith('/') ? { file: join(base, 'index.html') } : { redirect: `${urlPath}/` };
+  }
+  if (await isFile(`${base}.html`)) return { file: `${base}.html` };
   return null;
 }
 
 createServer(async (req, res) => {
-  const path = new URL(req.url ?? '/', 'http://x').pathname;
-  const file = await resolveFile(path);
-  if (file) {
-    res.writeHead(200, { 'content-type': TYPES[extname(file)] ?? 'application/octet-stream' });
-    res.end(await readFile(file));
+  let path;
+  try {
+    path = decodeURIComponent(new URL(req.url ?? '/', 'http://x').pathname);
+  } catch {
+    res.writeHead(400, { 'content-type': 'text/plain; charset=utf-8' });
+    res.end('Bad request');
     return;
   }
-  const notFound = await resolveFile('/404.html');
+  const found = await resolve(path);
+  if (found?.redirect) {
+    res.writeHead(301, { location: found.redirect });
+    res.end();
+    return;
+  }
+  if (found?.file) {
+    res.writeHead(200, {
+      'content-type': TYPES[extname(found.file)] ?? 'application/octet-stream',
+    });
+    res.end(await readFile(found.file));
+    return;
+  }
+  const notFound = join(ROOT, '404.html');
   res.writeHead(404, { 'content-type': TYPES['.html'] });
-  res.end(notFound ? await readFile(notFound) : 'Not found');
+  res.end((await isFile(notFound)) ? await readFile(notFound) : 'Not found');
 }).listen(PORT, () => console.log(`Serving dist on http://localhost:${PORT}`));

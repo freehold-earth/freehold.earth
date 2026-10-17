@@ -50,6 +50,39 @@ test.describe('age-proof walkthrough', () => {
   });
 });
 
+test('step counter is not announced on page load', async ({ page }) => {
+  // Records arrive in order, so track when each element becomes live and count
+  // only text changes made to an element after that point.
+  await page.addInitScript(() => {
+    const w = window as unknown as { liveChanges: number };
+    w.liveChanges = 0;
+    const live = new WeakSet<Node>();
+    new MutationObserver((records) => {
+      for (const r of records) {
+        if (r.type === 'attributes' && r.attributeName === 'aria-live') live.add(r.target);
+        else if (r.type !== 'attributes') {
+          for (let n: Node | null = r.target; n; n = n.parentNode) {
+            if (live.has(n)) w.liveChanges++;
+          }
+        }
+      }
+    }).observe(document, {
+      subtree: true,
+      childList: true,
+      characterData: true,
+      attributes: true,
+      attributeFilter: ['aria-live'],
+    });
+  });
+  await page.goto('/');
+  await page.waitForLoadState('networkidle');
+  const w = () => (window as unknown as { liveChanges: number }).liveChanges;
+  expect(await page.evaluate(w)).toBe(0);
+  // The observer does see changes the reader causes.
+  await page.getByRole('button', { name: 'Next' }).click();
+  expect(await page.evaluate(w)).toBeGreaterThan(0);
+});
+
 test.describe('walkthrough focus', () => {
   test('keeps focus on a visible button at the last step', async ({ page }) => {
     await page.goto('/');

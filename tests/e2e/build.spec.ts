@@ -23,10 +23,24 @@ test.describe('build page', () => {
     await expect(page.locator('[data-adr]')).toHaveCount(8);
   });
 
-  test('has an accessible layer diagram', async ({ page }) => {
+  test('has a labelled layer diagram', async ({ page }) => {
     await page.goto('/build/');
-    const svg = page.locator('svg[role="img"]');
-    await expect(svg).toHaveCount(1);
-    await expect(svg.locator('title')).toHaveCount(1);
+    const diagram = page.locator('.diagram');
+    await expect(diagram).toHaveCount(1);
+    await expect(diagram).toHaveAccessibleName(/layers/i);
+  });
+
+  test('keeps diagram text readable on a 320px phone', async ({ page }) => {
+    await page.setViewportSize({ width: 320, height: 800 });
+    await page.goto('/build/');
+    const heights = await page
+      .locator('.diagram')
+      .evaluate((root) =>
+        [...root.querySelectorAll('text, span, p, strong')]
+          .filter((el) => el.textContent?.trim())
+          .map((el) => el.getBoundingClientRect().height),
+      );
+    expect(heights.length).toBeGreaterThan(0);
+    expect(Math.min(...heights)).toBeGreaterThanOrEqual(11);
   });
 });
