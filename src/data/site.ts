@@ -1,8 +1,7 @@
 export const SITE_URL = 'https://freehold.earth';
 export const REPO_URL = 'https://github.com/freehold-earth/freehold';
-/** Set once Discussions is enabled on the freehold repo (launch step, owner approval). */
-export const DISCUSSIONS_URL: string | null = null;
-export const TALK_URL = DISCUSSIONS_URL ?? `${REPO_URL}/issues`;
+/** Where people can talk to the project: GitHub Discussions on the freehold repo. */
+export const TALK_URL = `${REPO_URL}/discussions`;
 
 export interface NavItem {
   href: string;
