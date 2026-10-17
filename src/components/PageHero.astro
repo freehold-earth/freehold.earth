@@ -1,0 +1,53 @@
+---
+// The clay intro every page opens with: same tone, structure and height, so
+// moving between pages feels like one site. Slots: default (lede), ctas.
+import Section from './Section.astro';
+import Kicker from './Kicker.astro';
+
+interface Props {
+  kicker: string;
+  title: string;
+  id?: string;
+}
+const { kicker, title, id = 'hero' } = Astro.props;
+---
+
+<Section tone="clay" grid id={id} labelledby={`${id}-title`}>
+  <div class="hero">
+    <Kicker>{kicker}</Kicker>
+    <h1 id={`${id}-title`}>{title}</h1>
+    <div class="lede">
+      <slot />
+    </div>
+    {Astro.slots.has('ctas') && (
+      <div class="ctas">
+        <slot name="ctas" />
+      </div>
+    )}
+  </div>
+</Section>
+
+<style>
+  .hero {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: var(--hero-height);
+  }
+  h1 {
+    max-width: 14ch;
+    margin-block: var(--space-4) var(--space-5);
+  }
+  .lede {
+    max-width: 54ch;
+  }
+  .lede :global(p:last-child) {
+    margin-bottom: 0;
+  }
+  .ctas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+    margin-top: var(--space-6);
+  }
+</style>

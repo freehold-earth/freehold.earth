@@ -20,19 +20,14 @@ const item = getStatus(id);
   .status-wrap {
     display: inline-grid;
     grid-auto-flow: column;
-    grid-template-columns: minmax(0, 1fr);
+    /* The tag follows its words; long labels wrap beside it. */
+    grid-template-columns: minmax(0, max-content);
+    justify-content: start;
     align-items: start;
     gap: var(--space-3);
-    width: 100%;
-  }
-  .status-wrap:not(:has(.item)) {
-    width: auto;
   }
   .item {
     padding-top: 0.1rem;
-  }
-  .tag {
-    justify-self: end;
   }
   .tag {
     display: inline-block;

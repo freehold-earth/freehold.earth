@@ -4,68 +4,95 @@ import Section from '../components/Section.astro';
 import Kicker from '../components/Kicker.astro';
 import Button from '../components/Button.astro';
 import Status from '../components/Status.astro';
+import PageHero from '../components/PageHero.astro';
 import Datacentre from '../components/home/Datacentre.astro';
 import { REPO_URL, TALK_URL } from '../data/site';
 
 // Sources: docs/decisions/004-infrastructure-philosophy.md (tiers, principles),
 // docs/concepts/manifesto.md (community cloud, economics table),
 // docs/concepts/executive-brief.md (costs). Figures are the docs' own estimates.
+// The "what we're planning" list is the owner's stated intent (2026-10-17).
+const hosts = [
+  [
+    'Local libraries',
+    "Already places for shared resources, shared knowledge and public service. Looking after the community's data fits right in.",
+  ],
+  ['Co-ops', 'Owned by their members already. A node is one more thing members share.'],
+  ['Clubs, faith groups and associations', 'Existing trust, existing ways of making decisions.'],
+  ['Families and friends', 'One small server, shared between people who already trust each other.'],
+];
+
 const tiers = [
   [
     'Your devices',
     'Your phone, laptop or home server.',
-    'Most sovereign. Limited by your hardware.',
+    'Everything stays with you, and you look after it.',
   ],
   [
     'Family and friends',
-    "A small box at a trusted relative or friend's house.",
-    'High trust, informal rules.',
+    "A small server at a relative's or friend's house.",
+    'Run by people you trust, on terms you agree between you.',
   ],
   [
     'Your community',
-    'A library, co-op or community centre.',
-    'Shared costs, local accountability, agreed rules.',
+    'Your local library, co-op or community centre.',
+    'Shared costs, shared skills, local decisions.',
   ],
   [
     'A federation',
-    'Regional co-ops or a municipal service, run under community governance.',
-    'Economies of scale, still accountable.',
+    'Several communities, or a council service, pooling resources.',
+    'Lower costs for everyone, and each community keeps its say.',
   ],
   [
     'Commercial cloud',
-    'Only as a last resort, by your choice.',
-    'Convenient, at a cost to sovereignty.',
+    'A mainstream cloud provider.',
+    'There if you need it today. Freehold meets you wherever you are on the way to running things yourselves.',
   ],
 ];
 
-const hosts = [
-  [
-    'Libraries',
-    'Already trusted, already offer free internet access. Data sovereignty is a natural next service.',
-  ],
-  ['Co-ops and credit unions', 'Member-owned by design. A node is a member benefit.'],
-  ['Clubs, faith groups and associations', 'Existing trust networks, existing governance.'],
-  ['Families and friends', 'One small server, shared between people who already trust each other.'],
+const costs = [
+  ['Your own devices', 'Free'],
+  ['Family node', '~$20 a month, shared'],
+  ['Community node', '~$10 per member a month'],
+  ['Federation', '~$5 per member a month'],
+];
+
+const planned = [
+  'Step-by-step guides for setting up and running a node',
+  'A reference setup you can copy',
+  'Do-it-yourself and one-click ways to deploy',
+  'Guides for organisations choosing hardware and services',
 ];
 ---
 
 <Base
   title="Communities"
-  description="A Freehold community node is a datacentre your library, co-op or village hall owns, runs and decides about. Your data stays local, the value stays local."
+  description="A Freehold community node is a datacentre your local library, co-op or village hall owns, runs and decides about. Shared costs, shared skills, local benefits."
 >
-  <Datacentre heading="h1" />
-
-  <Section tone="chalk" grid labelledby="what-heading">
-    <Kicker>What is a community node?</Kicker>
-    <h2 id="what-heading">Nobody should have to run a server alone.</h2>
+  <PageHero kicker="Communities" title="The datacentre is yours.">
     <p>
-      Running your own server is too much to ask of most people. Handing everything to a big tech
-      company defeats the point. A community node sits in between: one shared machine, run by people
-      you know, that holds your encrypted data and runs AI for its members.
+      Run Freehold on your own devices, or share a node with people you actually live near: your
+      local library, a co-op, a club or your family.
+    </p>
+    <Fragment slot="ctas">
+      <Button href={TALK_URL}>Talk to us about hosting</Button>
+      <Button href="#costs" variant="secondary">
+        What it costs
+      </Button>
+    </Fragment>
+  </PageHero>
+
+  <Section tone="sand" grid labelledby="why-heading">
+    <Kicker>Why share?</Kicker>
+    <h2 id="why-heading">Better together, if you want it.</h2>
+    <p>
+      You can run Freehold entirely on your own devices, and that is a first-class way to use it. A
+      community node is for when you would rather share: share the hardware and the costs, share the
+      skills, and look after it with people you know.
     </p>
     <p>
-      Your rules decide what leaves your devices, and the node is run by people you know, under
-      rules your community agrees.
+      Your rules still decide what leaves your devices, and the node is run by people you know,
+      under rules your community agrees.
     </p>
     <ul class="hosts">
       {hosts.map(([who, why]) => (
@@ -77,12 +104,14 @@ const hosts = [
     </ul>
   </Section>
 
-  <Section tone="clay-soft" grid labelledby="tiers-heading">
+  <Datacentre title="It matters who owns the datacentre." />
+
+  <Section tone="chalk" grid labelledby="tiers-heading">
     <Kicker>From your phone to your town</Kicker>
     <h2 id="tiers-heading">Run it where it makes sense.</h2>
     <p>
-      Freehold is designed to work at every scale, and you choose. Your rules will be able to say
-      which of these may handle which parts of your data.
+      Freehold is designed to work at every scale. Start wherever suits you and move along when you
+      are ready. Your rules will be able to say which of these may handle which parts of your data.
     </p>
     <p class="locality">
       <Status id="compute-locality" showLabel />
@@ -101,45 +130,42 @@ const hosts = [
     </ol>
   </Section>
 
-  <Section tone="ink" labelledby="cost-heading">
+  <Section tone="ink" id="costs" labelledby="cost-heading">
     <Kicker>What it costs</Kicker>
-    <h2 id="cost-heading">Shared costs, kept local.</h2>
+    <h2 id="cost-heading">Shared local costs, shared local benefits.</h2>
     <p>
-      Running costs are shared between members, and the money stays in the community: hardware,
-      power and a local operator rather than a distant company's profits.
+      We have estimated running costs for a healthy, active community, from the project's own
+      planning documents. The money pays for hardware, power and a local operator, not a distant
+      company's profits. Real costs will depend on hardware, power and local wages.
     </p>
     <dl class="costs">
-      <div data-cost>
-        <dt class="mono">Your own devices</dt>
-        <dd>Free (estimate)</dd>
-      </div>
-      <div data-cost>
-        <dt class="mono">Family node</dt>
-        <dd>About $20 a month, shared (estimate)</dd>
-      </div>
-      <div data-cost>
-        <dt class="mono">Community node</dt>
-        <dd>About $10 per member a month (estimate)</dd>
-      </div>
-      <div data-cost>
-        <dt class="mono">100 members</dt>
-        <dd>About $1,000 a month, covering hardware and a part-time operator (estimate)</dd>
-      </div>
+      {costs.map(([what, cost]) => (
+        <div data-cost>
+          <dt class="mono">{what}</dt>
+          <dd>{cost}</dd>
+        </div>
+      ))}
     </dl>
     <p class="small">
-      Estimates from the project's own planning documents. Real costs will depend on hardware, power
-      and local wages.
+      The more members share a node, or the more communities pool together, the less it costs each
+      person.
     </p>
   </Section>
 
   <Section tone="moss" labelledby="status-heading">
-    <Kicker>Where it's at</Kicker>
+    <Kicker>How we're doing</Kicker>
     <h2 id="status-heading">Be one of the first.</h2>
     <p>
       There is no ready-made community node kit yet. Today a developer can run every part of
-      Freehold on their own machine. Making it easy for a library or co-op to run is the next big
-      step, and we want to build it with the first communities, not for them.
+      Freehold on their own machine. Making it easy for a local library or co-op to run is the next
+      big step, and we want to build it with the first communities, not for them.
     </p>
+    <h3 class="sub">What we're planning</h3>
+    <ul class="planned">
+      {planned.map((item) => (
+        <li>{item}</li>
+      ))}
+    </ul>
     <ul class="statuses">
       <li>
         <Status id="community-node-kit" showLabel />
@@ -162,8 +188,8 @@ const hosts = [
   </Section>
 
   <Section tone="chalk" labelledby="prec-heading">
-    <Kicker>People already doing this</Kicker>
-    <h2 id="prec-heading">Community infrastructure already works.</h2>
+    <Kicker>It's already happening</Kicker>
+    <h2 id="prec-heading">Communities already run their own infrastructure.</h2>
     <ul class="prec">
       <li>
         <h3>
@@ -201,6 +227,9 @@ const hosts = [
     border-top: 2px solid var(--ink);
     padding-top: var(--space-3);
   }
+  .locality {
+    margin-top: var(--space-4);
+  }
   .tiers {
     list-style: none;
     padding: 0;
@@ -230,7 +259,7 @@ const hosts = [
   }
   .costs {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
     gap: var(--space-5);
     margin: var(--space-6) 0 0;
   }
@@ -244,13 +273,21 @@ const hosts = [
   }
   .costs dd {
     margin: 0;
-    font-size: 1.1rem;
+    font-size: 1.15rem;
     font-weight: 600;
   }
   .small {
-    font-size: 0.9rem;
-    opacity: 0.85;
+    font-size: 0.95rem;
+    opacity: 0.9;
     margin-top: var(--space-5);
+  }
+  .sub {
+    margin-top: var(--space-6);
+  }
+  .planned {
+    margin: 0 0 var(--space-5);
+    padding-left: 1.2rem;
+    line-height: 1.8;
   }
   .statuses {
     list-style: none;

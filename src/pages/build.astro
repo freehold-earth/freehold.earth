@@ -2,6 +2,7 @@
 import Base from '../layouts/Base.astro';
 import Section from '../components/Section.astro';
 import Kicker from '../components/Kicker.astro';
+import PageHero from '../components/PageHero.astro';
 import Button from '../components/Button.astro';
 import Status from '../components/Status.astro';
 import LayerDiagram from '../components/LayerDiagram.astro';
@@ -85,21 +86,19 @@ const adrs = [
   title="Build"
   description="Freehold is open source (Apache-2.0). TypeScript and Python, local-first storage, a local AI agent, privacy rules enforced on Cardano and zero-knowledge proofs on Midnight. Developer preview v0.1."
 >
-  <Section tone="clay" grid labelledby="build-title">
-    <Kicker>For builders · Developer preview v0.1</Kicker>
-    <h1 id="build-title">Build with Freehold.</h1>
-    <p class="lede">
+  <PageHero kicker="For builders · Developer preview v0.1" title="Build with Freehold.">
+    <p>
       Freehold is open source under Apache-2.0. It keeps personal context on devices people control,
       runs AI locally against it, and lets people prove facts about themselves without revealing the
       data. Every component is tagged v0.1.0 and runs on your machine today.
     </p>
-    <div class="ctas">
+    <Fragment slot="ctas">
       <Button href={REPO_URL}>View on GitHub</Button>
       <Button href={`${REPO_URL}#development`} variant="secondary">
         Run it locally
       </Button>
-    </div>
-  </Section>
+    </Fragment>
+  </PageHero>
 
   <Section tone="chalk" labelledby="layers-heading">
     <Kicker>Architecture</Kicker>

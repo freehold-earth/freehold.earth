@@ -10,7 +10,7 @@ export interface NavItem {
 }
 
 export const NAV: NavItem[] = [
-  { href: '/#how', label: 'How it works' },
+  { href: '/', label: 'Home' },
   { href: '/communities/', label: 'Communities' },
   { href: '/build/', label: 'Build' },
   { href: '/manifesto/', label: 'Manifesto' },

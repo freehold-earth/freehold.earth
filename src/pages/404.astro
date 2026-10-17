@@ -1,7 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
-import Section from '../components/Section.astro';
-import Kicker from '../components/Kicker.astro';
+import PageHero from '../components/PageHero.astro';
 import Button from '../components/Button.astro';
 ---
 
@@ -10,17 +9,15 @@ import Button from '../components/Button.astro';
   description="This page does not exist. Head back to the Freehold homepage."
   noindex
 >
-  <Section tone="clay" grid labelledby="nf-title">
-    <Kicker>404</Kicker>
-    <h1 id="nf-title">This plot is empty.</h1>
-    <p class="lede">There is nothing here. It may have moved, or never existed.</p>
-    <div class="ctas">
+  <PageHero kicker="404" title="This plot is empty.">
+    <p>There is nothing here. It may have moved, or never existed.</p>
+    <Fragment slot="ctas">
       <Button href="/">Back to the homepage</Button>
       <Button href="/build/" variant="secondary">
         Build with Freehold
       </Button>
-    </div>
-  </Section>
+    </Fragment>
+  </PageHero>
 </Base>
 
 <style>

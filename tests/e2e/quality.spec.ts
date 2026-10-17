@@ -79,6 +79,12 @@ for (const path of PAGES) {
       expect(failures).toEqual([]);
     });
 
+    test('does not repeat a heading', async ({ page }) => {
+      await page.goto(path);
+      const headings = await page.locator('main h1, main h2').allInnerTexts();
+      expect(headings.length).toBe(new Set(headings).size);
+    });
+
     test('has exactly one h1 and a title', async ({ page }) => {
       await page.goto(path);
       await expect(page.locator('h1')).toHaveCount(1);
@@ -91,7 +97,7 @@ test.describe('site shell', () => {
   test('header nav has every NAV label', async ({ page }) => {
     await page.goto('/');
     const nav = page.getByRole('navigation', { name: 'Main' });
-    for (const label of ['How it works', 'Communities', 'Build', 'Manifesto', 'GitHub']) {
+    for (const label of ['Home', 'Communities', 'Build', 'Manifesto', 'GitHub']) {
       await expect(nav.getByRole('link', { name: label })).toBeVisible();
     }
   });

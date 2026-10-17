@@ -3,26 +3,45 @@ import Section from '../Section.astro';
 import Kicker from '../Kicker.astro';
 
 interface Props {
-  heading?: 'h1' | 'h2';
+  title?: string;
 }
-const { heading: Heading = 'h2' } = Astro.props;
+const { title = 'The datacentre is yours.' } = Astro.props;
 
-// Argument adapted from Peter Wilson, "AI Growth Zones: gift horse or Trojan horse?" (2026).
+// Argument from Peter Wilson, "AI Growth Zones: gift horse or Trojan horse?" (2026).
+const POST =
+  'https://peteski22.github.io/blog/2026/02/04/ai-growth-zones-gift-horse-or-trojan-horse/';
 const rows = [
-  ['Who owns it', 'A distant company', 'Your library, co-op or neighbours'],
+  [
+    'Who owns it',
+    'Big tech companies and their investors, mostly American: Microsoft, Google, Amazon, OpenAI and the like',
+    'Your local library, co-op or neighbours',
+  ],
+  [
+    'Where the money goes',
+    'To shareholders, mostly in the US',
+    'Stays local: running costs and local jobs',
+  ],
   ['Where your data goes', 'Wherever they send it', "Nowhere you haven't agreed to"],
-  ['Where the money goes', 'Out of town', 'Stays local: running costs, local jobs'],
-  ['Who decides', 'Shareholders', 'Members'],
+  [
+    'What your area gets',
+    'Noise, and more demand for power and water',
+    'Skills, jobs and a say in how it runs',
+  ],
+  ['Who decides', 'Their boards and investors', 'Members'],
 ];
 ---
 
 <Section tone="soil" id="datacentre" labelledby="dc-title">
   <Kicker>Community-owned compute</Kicker>
-  <Heading id="dc-title">The datacentre is yours.</Heading>
-  <p>
-    AI datacentres are arriving in towns that get the noise, the power bills and the water use,
-    while the value and the data flow somewhere else. Freehold turns that around. A node in your
-    library, co-op or village hall is a datacentre your community owns, runs and decides about.
+  <h2 id="dc-title">{title}</h2>
+  <p class="lede">
+    Big AI datacentres are being built near towns like ours. The town gets the noise and the extra
+    demand for power and water. The profits, and the data, mostly go to a handful of large American
+    tech companies.
+  </p>
+  <p class="lede">
+    Freehold turns that around. A node in your local library, co-op or village hall is a datacentre
+    your community owns, runs and decides about.
   </p>
   <table>
     <caption class="visually-hidden">Their datacentre compared with your community node</caption>
@@ -51,10 +70,18 @@ const rows = [
       ))}
     </tbody>
   </table>
-  <p class="pull">"Infrastructure can be renegotiated. Data, once extracted, is gone for good."</p>
+  <figure class="quote">
+    <blockquote>A datacentre can be bought back one day. Your data can't.</blockquote>
+    <figcaption>
+      Adapted from <a href={POST}>AI Growth Zones: gift horse or Trojan horse?</a> by Peter Wilson
+    </figcaption>
+  </figure>
 </Section>
 
 <style>
+  .lede {
+    font-size: clamp(1.0625rem, 0.5vw + 1rem, 1.2rem);
+  }
   table {
     width: 100%;
     border-collapse: collapse;
@@ -80,14 +107,22 @@ const rows = [
   thead .ours {
     color: var(--sun-light);
   }
-  .pull {
-    margin-top: var(--space-6);
-    font-size: clamp(1.4rem, 2vw + 0.8rem, 1.8rem);
+  .quote {
+    margin: var(--space-7) 0 0;
+  }
+  blockquote {
+    margin: 0;
+    font-size: clamp(1.5rem, 2.5vw + 0.8rem, 2.1rem);
     font-weight: 800;
     letter-spacing: -0.02em;
-    line-height: 1.2;
+    line-height: 1.15;
     color: var(--clay);
-    max-width: 36ch;
+    max-width: 24ch;
+  }
+  figcaption {
+    margin-top: var(--space-3);
+    font-size: 0.9rem;
+    opacity: 0.85;
   }
   @media (max-width: 40rem) {
     thead {

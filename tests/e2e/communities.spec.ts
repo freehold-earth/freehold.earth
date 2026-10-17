@@ -6,11 +6,13 @@ test.describe('communities page', () => {
     await expect(page.locator('h1')).toHaveText('The datacentre is yours.');
   });
 
-  test('labels every cost as an estimate', async ({ page }) => {
+  test('introduces the costs as estimates and marks figures as approximate', async ({ page }) => {
     await page.goto('/communities/');
-    const costs = page.locator('[data-cost]');
+    const section = page.locator('section', { has: page.locator('#cost-heading') });
+    await expect(section).toContainText('estimated');
+    const costs = section.locator('[data-cost] dd');
     expect(await costs.count()).toBeGreaterThan(0);
-    for (const cost of await costs.all()) await expect(cost).toContainText('estimate');
+    for (const cost of await costs.all()) await expect(cost).toHaveText(/^(Free|~)/);
   });
 
   test('is honest that the node kit is planned and offers a conversation', async ({ page }) => {

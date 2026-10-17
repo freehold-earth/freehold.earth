@@ -1,7 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import Section from '../components/Section.astro';
-import Kicker from '../components/Kicker.astro';
+import PageHero from '../components/PageHero.astro';
 import Button from '../components/Button.astro';
 import { Content } from '../content/manifesto.md';
 import { REPO_URL } from '../data/site';
@@ -16,11 +16,9 @@ const ORIGINAL = `${REPO_URL}/blob/main/docs/concepts/manifesto.md`;
   title="Manifesto"
   description="Freehold, not leasehold. Why your context should live on your devices, be worked on by your own AI, and be shared only on your terms."
 >
-  <Section tone="clay" grid labelledby="m-title">
-    <Kicker>Manifesto</Kicker>
-    <h1 id="m-title">Freehold, not leasehold.</h1>
-    <p class="lede">Owning your data, your AI and the infrastructure they run on.</p>
-  </Section>
+  <PageHero kicker="Manifesto" title="Freehold, not leasehold.">
+    <p>Owning your data, your AI and the infrastructure they run on.</p>
+  </PageHero>
   <Section tone="chalk">
     <article class="prose">
       <Content />

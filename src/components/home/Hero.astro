@@ -1,37 +1,21 @@
 ---
-import Section from '../Section.astro';
+import PageHero from '../PageHero.astro';
 import Button from '../Button.astro';
-import Kicker from '../Kicker.astro';
 ---
 
-<Section tone="clay" grid id="hero">
-  <Kicker>Open source · Local-first · Community-run</Kicker>
-  <h1 class="hero-title">Your data. Your rules. Your community.</h1>
-  <p class="lede">
+<PageHero
+  kicker="Open source · Local-first · Community-run"
+  title="Your data. Your rules. Your community."
+>
+  <p>
     Freehold keeps your data on your own devices, lets your own AI work on it, and enforces your
-    rules with maths rather than promises. Run it yourself, or with your library, co-op or
+    rules with maths rather than promises. Run it yourself, or with your local library, co-op or
     neighbourhood.
   </p>
-  <div class="ctas">
+  <Fragment slot="ctas">
     <Button href="#see-it-work">See it work</Button>
     <Button href="/build/" variant="secondary">
       I'm a builder
     </Button>
-  </div>
-</Section>
-
-<style>
-  .hero-title {
-    max-width: 13ch;
-    margin-block: var(--space-5);
-  }
-  .lede {
-    max-width: 54ch;
-    margin-bottom: var(--space-6);
-  }
-  .ctas {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--space-3);
-  }
-</style>
+  </Fragment>
+</PageHero>
