@@ -2,6 +2,7 @@
 import Section from '../Section.astro';
 import Kicker from '../Kicker.astro';
 import Button from '../Button.astro';
+import Walkthrough from '../Walkthrough.astro';
 import { getStatus, STATE_LABEL } from '../../data/status';
 import { REPO_URL } from '../../data/site';
 
@@ -29,8 +30,8 @@ const demo = getStatus('age-proof-demo');
         </Button>
       </div>
     </div>
-    <div id="walkthrough" class="walkthrough-slot">
-      <slot />
+    <div id="walkthrough">
+      <Walkthrough />
     </div>
   </div>
 </Section>
