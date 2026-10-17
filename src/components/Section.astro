@@ -7,7 +7,9 @@ interface Props {
   id?: string;
   labelledby?: string;
 }
-const { tone, grid = false, id, labelledby } = Astro.props;
+const { tone, id, labelledby } = Astro.props;
+// Light body sections always carry the plot grid (see DESIGN.md, page system).
+const grid = Astro.props.grid || tone === 'chalk';
 ---
 
 <section class:list={['section', tone, { grid }]} id={id} aria-labelledby={labelledby}>

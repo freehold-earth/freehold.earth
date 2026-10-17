@@ -6,6 +6,7 @@ import PageHero from '../components/PageHero.astro';
 import Button from '../components/Button.astro';
 import Status from '../components/Status.astro';
 import LayerDiagram from '../components/LayerDiagram.astro';
+import BuiltInOpen from '../components/home/BuiltInOpen.astro';
 import { REPO_URL, TALK_URL } from '../data/site';
 
 const TREE = `${REPO_URL}/tree/main`;
@@ -84,9 +85,14 @@ const adrs = [
 
 <Base
   title="Build"
+  tone="clay-soft"
   description="Freehold is open source (Apache-2.0). TypeScript and Python, local-first storage, a local AI agent, privacy rules enforced on Cardano and zero-knowledge proofs on Midnight. Developer preview v0.1."
 >
-  <PageHero kicker="For builders · Developer preview v0.1" title="Build with Freehold.">
+  <PageHero
+    kicker="For builders · Developer preview v0.1"
+    title="Build with Freehold."
+    tone="clay-soft"
+  >
     <p>
       Freehold is open source under Apache-2.0. It keeps personal context on devices people control,
       runs AI locally against it, and lets people prove facts about themselves without revealing the
@@ -167,6 +173,8 @@ const adrs = [
       </Button>
     </div>
   </Section>
+
+  <BuiltInOpen showPrecedents={false} />
 
   <Section tone="sun" labelledby="contribute-heading">
     <Kicker>Contribute</Kicker>

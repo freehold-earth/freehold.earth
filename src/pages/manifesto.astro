@@ -4,6 +4,8 @@ import Section from '../components/Section.astro';
 import PageHero from '../components/PageHero.astro';
 import Button from '../components/Button.astro';
 import { Content } from '../content/manifesto.md';
+import BuiltInOpen from '../components/home/BuiltInOpen.astro';
+import CallToAction from '../components/CallToAction.astro';
 import { REPO_URL } from '../data/site';
 import '../styles/prose.css';
 
@@ -14,39 +16,29 @@ const ORIGINAL = `${REPO_URL}/blob/main/docs/concepts/manifesto.md`;
 
 <Base
   title="Manifesto"
+  tone="sand"
   description="Freehold, not leasehold. Why your context should live on your devices, be worked on by your own AI, and be shared only on your terms."
 >
-  <PageHero kicker="Manifesto" title="Freehold, not leasehold.">
+  <PageHero kicker="Manifesto" title="Freehold, not leasehold." tone="sand">
     <p>Owning your data, your AI and the infrastructure they run on.</p>
   </PageHero>
   <Section tone="chalk">
     <article class="prose">
       <Content />
     </article>
-    <aside class="more">
-      <p class="mono">Read more</p>
-      <div class="ctas">
-        <Button href="/build/">How it's built</Button>
-        <Button href="/communities/" variant="secondary">
-          Community nodes
-        </Button>
-        <Button href={ORIGINAL} variant="secondary">
-          The full original manifesto
-        </Button>
-      </div>
-    </aside>
   </Section>
-</Base>
 
-<style>
-  .more {
-    margin-top: var(--space-7);
-    padding-top: var(--space-5);
-    border-top: 2px solid var(--ink);
-  }
-  .ctas {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--space-3);
-  }
-</style>
+  <BuiltInOpen showPrecedents={false} />
+
+  <CallToAction kicker="Read more" title="See how it's built, or bring it to your community.">
+    <Fragment slot="ctas">
+      <Button href="/build/">How it's built</Button>
+      <Button href="/communities/" variant="secondary">
+        Community nodes
+      </Button>
+      <Button href={ORIGINAL} variant="secondary">
+        The full original manifesto
+      </Button>
+    </Fragment>
+  </CallToAction>
+</Base>

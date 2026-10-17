@@ -3,6 +3,10 @@ import Section from '../Section.astro';
 import Kicker from '../Kicker.astro';
 import { byState, STATE_LABEL, type StatusState } from '../../data/status';
 
+interface Props {
+  showPrecedents?: boolean;
+}
+const { showPrecedents = true } = Astro.props;
 const columns: StatusState[] = ['preview', 'in-development', 'planned'];
 // Precedents from docs/concepts/manifesto.md references; inspiration, not partners.
 const precedents = [
@@ -51,18 +55,20 @@ const precedents = [
     Developer preview means a developer can run it from the repo today. Nothing here is ready for
     everyday use yet.
   </p>
-  <div class="precedents">
-    <p class="mono kick">Communities already run their own infrastructure</p>
-    <ul>
-      {precedents.map((p) => (
-        <li>
-          <strong>{p.href ? <a href={p.href}>{p.name}</a> : p.name}</strong>
-          <span>{p.text}</span>
-        </li>
-      ))}
-    </ul>
-    <p class="small">These projects inspire Freehold. They are not affiliated with it.</p>
-  </div>
+  {showPrecedents && (
+    <div class="precedents">
+      <p class="mono kick">Communities already run their own infrastructure</p>
+      <ul>
+        {precedents.map((p) => (
+          <li>
+            <strong>{p.href ? <a href={p.href}>{p.name}</a> : p.name}</strong>
+            <span>{p.text}</span>
+          </li>
+        ))}
+      </ul>
+      <p class="small">These projects inspire Freehold. They are not affiliated with it.</p>
+    </div>
+  )}
 </Section>
 
 <style>

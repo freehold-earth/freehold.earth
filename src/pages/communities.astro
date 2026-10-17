@@ -6,6 +6,7 @@ import Button from '../components/Button.astro';
 import Status from '../components/Status.astro';
 import PageHero from '../components/PageHero.astro';
 import Datacentre from '../components/home/Datacentre.astro';
+import CallToAction from '../components/CallToAction.astro';
 import { REPO_URL, TALK_URL } from '../data/site';
 
 // Sources: docs/decisions/004-infrastructure-philosophy.md (tiers, principles),
@@ -67,9 +68,10 @@ const planned = [
 
 <Base
   title="Communities"
+  tone="sun"
   description="A Freehold community node is a datacentre your local library, co-op or village hall owns, runs and decides about. Shared costs, shared skills, local benefits."
 >
-  <PageHero kicker="Communities" title="The datacentre is yours.">
+  <PageHero kicker="Communities" title="The datacentre is yours." tone="sun">
     <p>
       Run Freehold on your own devices, or share a node with people you actually live near: your
       local library, a co-op, a club or your family.
@@ -82,7 +84,7 @@ const planned = [
     </Fragment>
   </PageHero>
 
-  <Section tone="sand" grid labelledby="why-heading">
+  <Section tone="chalk" labelledby="why-heading">
     <Kicker>Why share?</Kicker>
     <h2 id="why-heading">Better together, if you want it.</h2>
     <p>
@@ -152,6 +154,30 @@ const planned = [
     </p>
   </Section>
 
+  <Section tone="chalk" labelledby="prec-heading">
+    <Kicker>It's already happening</Kicker>
+    <h2 id="prec-heading">Communities already run their own infrastructure.</h2>
+    <ul class="prec">
+      <li>
+        <h3>
+          <a href="https://guifi.net/en">Guifi.net</a>
+        </h3>
+        <p>A community-built network in Catalonia with tens of thousands of nodes.</p>
+      </li>
+      <li>
+        <h3>El Servidor del Barri</h3>
+        <p>A neighbourhood server in Barcelona running email, files, passwords and calendars.</p>
+      </li>
+      <li>
+        <h3>
+          <a href="https://www.bbc.co.uk/news/articles/c0rpy7envr5o">Community Box</a>
+        </h3>
+        <p>Local cloud services for rural communities in the UK.</p>
+      </li>
+    </ul>
+    <p class="small">These projects inspire Freehold. They are not affiliated with it.</p>
+  </Section>
+
   <Section tone="moss" labelledby="status-heading">
     <Kicker>How we're doing</Kicker>
     <h2 id="status-heading">Be one of the first.</h2>
@@ -187,29 +213,18 @@ const planned = [
     </div>
   </Section>
 
-  <Section tone="chalk" labelledby="prec-heading">
-    <Kicker>It's already happening</Kicker>
-    <h2 id="prec-heading">Communities already run their own infrastructure.</h2>
-    <ul class="prec">
-      <li>
-        <h3>
-          <a href="https://guifi.net/en">Guifi.net</a>
-        </h3>
-        <p>A community-built network in Catalonia with tens of thousands of nodes.</p>
-      </li>
-      <li>
-        <h3>El Servidor del Barri</h3>
-        <p>A neighbourhood server in Barcelona running email, files, passwords and calendars.</p>
-      </li>
-      <li>
-        <h3>
-          <a href="https://www.bbc.co.uk/news/articles/c0rpy7envr5o">Community Box</a>
-        </h3>
-        <p>Local cloud services for rural communities in the UK.</p>
-      </li>
-    </ul>
-    <p class="small">These projects inspire Freehold. They are not affiliated with it.</p>
-  </Section>
+  <CallToAction kicker="Get in touch" title="Could your community run a node?">
+    <p>
+      If you're part of a local library, co-op, club or any group that might host one, we'd love to
+      hear from you. The first community nodes will be shaped by the first communities.
+    </p>
+    <Fragment slot="ctas">
+      <Button href={TALK_URL}>Talk to us</Button>
+      <Button href="/manifesto/" variant="secondary">
+        Read the manifesto
+      </Button>
+    </Fragment>
+  </CallToAction>
 </Base>
 
 <style>

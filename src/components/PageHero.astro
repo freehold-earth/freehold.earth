@@ -1,18 +1,20 @@
 ---
-// The clay intro every page opens with: same tone, structure and height, so
-// moving between pages feels like one site. Slots: default (lede), ctas.
+// The intro every page opens with: same structure, spacing and height so
+// moving between pages feels like one site. Each page picks its own warm tone. Slots: default (lede), ctas.
 import Section from './Section.astro';
 import Kicker from './Kicker.astro';
+import type { PageTone } from './types';
 
 interface Props {
   kicker: string;
   title: string;
   id?: string;
+  tone?: PageTone;
 }
-const { kicker, title, id = 'hero' } = Astro.props;
+const { kicker, title, id = 'hero', tone = 'clay' } = Astro.props;
 ---
 
-<Section tone="clay" grid id={id} labelledby={`${id}-title`}>
+<Section tone={tone} grid id={id} labelledby={`${id}-title`}>
   <div class="hero">
     <Kicker>{kicker}</Kicker>
     <h1 id={`${id}-title`}>{title}</h1>
@@ -31,8 +33,11 @@ const { kicker, title, id = 'hero' } = Astro.props;
   .hero {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     min-height: var(--hero-height);
+  }
+  .hero :global(.kicker) {
+    margin-top: 0;
   }
   h1 {
     max-width: 14ch;

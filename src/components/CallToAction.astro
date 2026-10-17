@@ -1,0 +1,40 @@
+---
+// The yellow band every page ends on: one clear next step.
+import Section from './Section.astro';
+import Kicker from './Kicker.astro';
+
+interface Props {
+  kicker: string;
+  title: string;
+  id?: string;
+}
+const { kicker, title, id = 'next' } = Astro.props;
+---
+
+<Section tone="sun" id={id} labelledby={`${id}-title`}>
+  <Kicker>{kicker}</Kicker>
+  <h2 id={`${id}-title`} class="title">
+    {title}
+  </h2>
+  <div class="body">
+    <slot />
+  </div>
+  <div class="ctas">
+    <slot name="ctas" />
+  </div>
+</Section>
+
+<style>
+  .title {
+    max-width: 30ch;
+  }
+  .body :global(p) {
+    max-width: 58ch;
+  }
+  .ctas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+    margin-top: var(--space-5);
+  }
+</style>
