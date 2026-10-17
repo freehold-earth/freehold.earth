@@ -105,6 +105,7 @@ Plain, warm and confident. Short sentences. British English (neighbourhood, data
 - Don't link to things that don't exist yet. Use `GatedCta`.
 - Don't add third-party requests: no analytics, cookies, Google Fonts, CDNs or embeds.
 - Don't add testimonials, counters or invented numbers.
+- Don't put release numbers (v0.1 and so on) in page copy; they go stale. Status labels carry maturity. A build test enforces this.
 - Don't use one-off colours, sizes or spacing outside the tokens.
 
 ## QA checklist

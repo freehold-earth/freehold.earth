@@ -33,7 +33,7 @@ const layers = [
     dir: 'spec',
     title: 'Privacy rules language',
     stack: 'S-PAL · JSON Schema · Python',
-    body: 'A machine-readable way to say what can be shared, with whom, for how long and for what use. Its working name is S-PAL (Sovereign Privacy and Access Language), and it is a proposal, not an established standard. Includes the v1.0 schema, a reference encoder and test vectors.',
+    body: 'A machine-readable way to say what can be shared, with whom, for how long and for what use. Its working name is S-PAL (Sovereign Privacy and Access Language), and it is a proposal, not an established standard. Includes the schema, a reference encoder and test vectors.',
     status: ['spal-spec', 'compute-locality'],
   },
   {
@@ -86,17 +86,13 @@ const adrs = [
 <Base
   title="Build"
   tone="clay-soft"
-  description="Freehold is open source (Apache-2.0). TypeScript and Python, local-first storage, a local AI agent, privacy rules enforced on Cardano and zero-knowledge proofs on Midnight. Developer preview v0.1."
+  description="Freehold is open source (Apache-2.0). TypeScript and Python, local-first storage, a local AI agent, privacy rules enforced on Cardano and zero-knowledge proofs on Midnight. In developer preview."
 >
-  <PageHero
-    kicker="For builders · Developer preview v0.1"
-    title="Build with Freehold."
-    tone="clay-soft"
-  >
+  <PageHero kicker="For builders · Developer preview" title="Build with Freehold." tone="clay-soft">
     <p>
       Freehold is open source under Apache-2.0. It keeps personal context on devices people control,
       runs AI locally against it, and lets people prove facts about themselves without revealing the
-      data. Every component is tagged v0.1.0 and runs on your machine today.
+      data. It is all open source, and you can run every part of it on your own machine.
     </p>
     <Fragment slot="ctas">
       <Button href={REPO_URL}>View on GitHub</Button>

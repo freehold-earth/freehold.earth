@@ -77,4 +77,14 @@ describe('built site for GitHub Pages', () => {
     expect(readFileSync(join(DIST, 'favicon.svg'), 'utf8')).toMatch(breakout);
     expect(readFileSync(join(DIST, 'index.html'), 'utf8')).toMatch(breakout);
   });
+
+  it('puts no release numbers in page text, which would go stale', () => {
+    const offenders = htmlFiles(DIST).flatMap((file) => {
+      const text = readFileSync(file, 'utf8')
+        .replace(/<script[\s\S]*?<\/script>/g, ' ')
+        .replace(/<[^>]+>/g, ' ');
+      return [...text.matchAll(/\bv\d+\.\d+(\.\d+)?\b/g)].map((m) => `${file}: ${m[0]}`);
+    });
+    expect(offenders).toEqual([]);
+  });
 });
