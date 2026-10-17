@@ -29,6 +29,16 @@ for (const path of PAGES) {
       expect(width).toBeLessThanOrEqual(320);
     });
 
+    test('has description, canonical, icon and an absolute og:image', async ({ page }) => {
+      await page.goto(path);
+      const description = await page.locator('meta[name="description"]').getAttribute('content');
+      expect(description?.trim().length).toBeGreaterThan(20);
+      await expect(page.locator('link[rel="canonical"]')).toHaveCount(1);
+      await expect(page.locator('link[rel="icon"]')).toHaveCount(1);
+      const og = await page.locator('meta[property="og:image"]').getAttribute('content');
+      expect(og).toMatch(/^https:\/\/freehold\.earth\//);
+    });
+
     test('has exactly one h1 and a title', async ({ page }) => {
       await page.goto(path);
       await expect(page.locator('h1')).toHaveCount(1);

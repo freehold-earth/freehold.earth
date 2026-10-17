@@ -1,0 +1,32 @@
+---
+import Base from '../layouts/Base.astro';
+import Section from '../components/Section.astro';
+import Kicker from '../components/Kicker.astro';
+import Button from '../components/Button.astro';
+---
+
+<Base
+  title="Page not found"
+  description="This page does not exist. Head back to the Freehold homepage."
+>
+  <Section tone="clay" grid labelledby="nf-title">
+    <Kicker>404</Kicker>
+    <h1 id="nf-title">This plot is empty.</h1>
+    <p class="lede">There is nothing here. It may have moved, or never existed.</p>
+    <div class="ctas">
+      <Button href="/">Back to the homepage</Button>
+      <Button href="/build/" variant="secondary">
+        Build with Freehold
+      </Button>
+    </div>
+  </Section>
+</Base>
+
+<style>
+  .ctas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+    margin-top: var(--space-5);
+  }
+</style>
