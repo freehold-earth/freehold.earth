@@ -16,7 +16,7 @@ test('build identity card shows each identity piece with its status', async ({ p
     'One-time identities',
     'Prove it was you, when you choose',
     'Untraceable funding for one-time IDs',
-    'Prove it was you without revealing who you are',
+    'Prove it was you, anonymously',
   ]) {
     await expect(card).toContainText(label);
   }

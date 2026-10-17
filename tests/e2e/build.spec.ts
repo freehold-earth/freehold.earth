@@ -8,7 +8,19 @@ test.describe('build page', () => {
     for (const dir of ['context-store', 'agent', 'spec', 'contracts', 'zkp', 'identity']) {
       const layer = page.locator(`[data-layer="${dir}"]`);
       await expect(layer.locator('[data-state]').first()).toBeVisible();
-      await expect(layer.locator(`a[href="${TREE}/${dir}"]`)).toHaveCount(1);
+      await expect(layer.locator(`a.code[href="${TREE}/${dir}"]`)).toHaveCount(1);
+    }
+  });
+
+  test('links every status to where it can be checked in the repo', async ({ page }) => {
+    await page.goto('/build/');
+    const labels = page.locator('.layer .status-wrap');
+    expect(await labels.count()).toBeGreaterThan(10);
+    for (const label of await labels.all()) {
+      await expect(label.locator('a.item')).toHaveAttribute(
+        'href',
+        /^https:\/\/github\.com\/freehold-earth\/freehold\/(tree|blob)\/main\//,
+      );
     }
   });
 

@@ -122,7 +122,7 @@ const adrs = [
           <ul class="statuses">
             {l.status.map((id) => (
               <li>
-                <Status id={id} showLabel />
+                <Status id={id} showLabel linked />
               </li>
             ))}
           </ul>
@@ -138,10 +138,10 @@ const adrs = [
     <Kicker>Run it</Kicker>
     <h2 id="run-heading">Everything runs locally.</h2>
     <p>
-      The repo is a monorepo with TypeScript packages (pnpm) and Python packages (uv). The age-proof
-      demo brings up the agent, the proof service and a local Cardano devnet. The repo README and
-      each component's README have the current commands; we link to them rather than copy them here
-      so they never go stale.
+      The repo is a monorepo with TypeScript packages (<a href="https://pnpm.io/">pnpm</a>) and
+      Python packages (<a href="https://docs.astral.sh/uv/">uv</a>). The age-proof demo brings up
+      the agent, the proof service and a local Cardano devnet. Setup steps live in the repo README
+      and each component's README, so they always match the code.
     </p>
     <div class="ctas">
       <Button href={`${REPO_URL}#development`} variant="on-dark">
@@ -206,7 +206,7 @@ const adrs = [
   }
   .layers {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 26rem), 1fr));
     gap: var(--space-4);
     margin-top: var(--space-6);
   }

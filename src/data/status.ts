@@ -21,6 +21,7 @@ export const STATE_LABEL: Record<StatusState, string> = {
 };
 
 const TREE = 'https://github.com/freehold-earth/freehold/tree/main';
+const BLOB = 'https://github.com/freehold-earth/freehold/blob/main';
 
 export const STATUS: readonly StatusItem[] = [
   {
@@ -106,7 +107,7 @@ export const STATUS: readonly StatusItem[] = [
   },
   {
     id: 'link-proof',
-    label: 'Prove it was you without revealing who you are',
+    label: 'Prove it was you, anonymously',
     state: 'planned',
     source: 'docs/concepts/identity-privacy-model.md',
   },
@@ -163,4 +164,14 @@ export function getStatus(id: string): StatusItem {
 
 export function byState(state: StatusState): StatusItem[] {
   return STATUS.filter((s) => s.state === state);
+}
+
+/** Where a reader can check an item: its link if it has one, else its source. */
+export function statusHref(item: StatusItem): string {
+  if (item.link) return item.link;
+  const path = item.source.split('#')[0];
+  if (path.startsWith('https://')) return path;
+  if (path.startsWith('tag:'))
+    return `${TREE.replace('/tree/main', '')}/releases/tag/${path.slice(4)}`;
+  return `${BLOB}/${path}`;
 }

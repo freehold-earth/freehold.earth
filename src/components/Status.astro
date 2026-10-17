@@ -1,16 +1,25 @@
 ---
-import { getStatus, STATE_LABEL } from '../data/status';
+import { getStatus, statusHref, STATE_LABEL } from '../data/status';
 
 interface Props {
   id: string;
   showLabel?: boolean;
+  /** Link the label to where the state can be checked in the repo. */
+  linked?: boolean;
 }
-const { id, showLabel = false } = Astro.props;
+const { id, showLabel = false, linked = false } = Astro.props;
 const item = getStatus(id);
 ---
 
 <span class="status-wrap">
-  {showLabel && <span class="item">{item.label}</span>}
+  {showLabel &&
+    (linked ? (
+      <a class="item" href={statusHref(item)}>
+        {item.label}
+      </a>
+    ) : (
+      <span class="item">{item.label}</span>
+    ))}
   <span class="mono tag" data-state={item.state}>
     {STATE_LABEL[item.state]}
   </span>

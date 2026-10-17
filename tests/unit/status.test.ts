@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { STATUS, STATE_LABEL, getStatus, byState } from '../../src/data/status';
+import { STATUS, STATE_LABEL, getStatus, byState, statusHref } from '../../src/data/status';
 
 describe('status data', () => {
   it('has unique ids', () => {
@@ -28,5 +28,14 @@ describe('status data', () => {
 
   it('filters by state', () => {
     for (const item of byState('planned')) expect(item.state).toBe('planned');
+  });
+
+  it('links to the item link, else the source file', () => {
+    expect(statusHref(getStatus('identity-didkey'))).toBe(
+      'https://github.com/freehold-earth/freehold/tree/main/identity',
+    );
+    expect(statusHref(getStatus('link-proof'))).toBe(
+      'https://github.com/freehold-earth/freehold/blob/main/docs/concepts/identity-privacy-model.md',
+    );
   });
 });
