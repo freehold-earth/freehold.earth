@@ -36,3 +36,34 @@ for (const path of PAGES) {
     });
   });
 }
+
+test.describe('site shell', () => {
+  test('header nav has every NAV label', async ({ page }) => {
+    await page.goto('/');
+    const nav = page.getByRole('navigation', { name: 'Main' });
+    for (const label of ['How it works', 'Communities', 'Build', 'Manifesto', 'GitHub']) {
+      await expect(nav.getByRole('link', { name: label })).toBeVisible();
+    }
+  });
+
+  test('focus is visible on links in main', async ({ page }) => {
+    await page.goto('/');
+    const link = page.locator('main a').first();
+    await link.focus();
+    await page.keyboard.press('Shift+Tab');
+    await page.keyboard.press('Tab');
+    const style = await link.evaluate((el) => {
+      const s = getComputedStyle(el);
+      return { style: s.outlineStyle, width: parseFloat(s.outlineWidth) };
+    });
+    expect(style.style).not.toBe('none');
+    expect(style.width).toBeGreaterThanOrEqual(2);
+  });
+
+  test('footer states the no-tracking promise', async ({ page }) => {
+    await page.goto('/');
+    await expect(page.locator('footer')).toContainText(
+      'No trackers. No cookies. No third-party requests.',
+    );
+  });
+});

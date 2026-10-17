@@ -1,0 +1,50 @@
+---
+import Logo from './Logo.astro';
+import { REPO_URL } from '../data/site';
+---
+
+<footer class="site-footer">
+  <div class="wrap row">
+    <div class="col">
+      <Logo />
+      <p class="mono">No trackers. No cookies. No third-party requests.</p>
+    </div>
+    <ul class="mono">
+      <li>
+        <a href={REPO_URL}>GitHub</a>
+      </li>
+      <li>
+        <a href="/manifesto/">Manifesto</a>
+      </li>
+      <li>
+        <a href={`${REPO_URL}/blob/main/LICENSE`}>Apache-2.0</a>
+      </li>
+    </ul>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    background: var(--ink);
+    color: var(--chalk);
+    padding-block: var(--space-6);
+  }
+  .row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: var(--space-5);
+  }
+  .col p {
+    margin: var(--space-3) 0 0;
+    opacity: 0.85;
+  }
+  ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-5);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+</style>

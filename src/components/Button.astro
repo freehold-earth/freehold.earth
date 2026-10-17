@@ -1,0 +1,58 @@
+---
+import type { ButtonVariant } from './types';
+
+interface Props {
+  href: string;
+  variant?: ButtonVariant;
+  external?: boolean;
+}
+const { href, variant = 'primary', external = false } = Astro.props;
+---
+
+<a class:list={['btn', variant]} href={href} rel={external ? 'noopener' : undefined}>
+  <slot />
+</a>
+
+<style>
+  .btn {
+    display: inline-block;
+    padding: 0.85rem 1.25rem;
+    border: 2px solid var(--ink);
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    text-decoration: none;
+    line-height: 1.2;
+  }
+  .primary {
+    background: var(--ink);
+    color: var(--chalk);
+  }
+  .primary:hover {
+    background: var(--soil);
+  }
+  .secondary {
+    background: transparent;
+    color: var(--ink);
+  }
+  .secondary:hover {
+    background: rgb(31 26 22 / 8%);
+  }
+  .on-dark {
+    background: transparent;
+    border-color: var(--chalk);
+    color: var(--chalk);
+  }
+  .on-dark:hover {
+    background: rgb(246 239 228 / 10%);
+  }
+  .btn:focus-visible {
+    outline: 3px solid currentColor;
+    outline-offset: 3px;
+  }
+  .primary:focus-visible {
+    outline-color: var(--ink);
+  }
+</style>

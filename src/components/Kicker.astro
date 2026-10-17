@@ -1,0 +1,21 @@
+---
+interface Props {
+  as?: 'p' | 'span';
+}
+const { as: Tag = 'p' } = Astro.props;
+---
+
+<Tag class="mono kicker">
+  <slot />
+</Tag>
+
+<style>
+  .kicker {
+    margin: 0 0 var(--space-3);
+  }
+  :global(.ink) .kicker,
+  :global(.soil) .kicker,
+  :global(.moss) .kicker {
+    color: var(--sun-light);
+  }
+</style>

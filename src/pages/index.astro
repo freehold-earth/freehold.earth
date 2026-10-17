@@ -1,16 +1,17 @@
 ---
+import Base from '../layouts/Base.astro';
+import Section from '../components/Section.astro';
+import Button from '../components/Button.astro';
+import Kicker from '../components/Kicker.astro';
 ---
 
-<html lang="en-GB">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <title>Freehold</title>
-  </head>
-  <body>
-    <main>
-      <h1>Freehold</h1>
-    </main>
-  </body>
-</html>
+<Base
+  title="Freehold"
+  description="Your data, your rules, your community. Freehold is open source, local-first infrastructure for data sovereignty."
+>
+  <Section tone="clay" grid>
+    <Kicker>Freehold, not leasehold</Kicker>
+    <h1>Your data. Your rules. Your community.</h1>
+    <Button href="/build/">I'm a builder</Button>
+  </Section>
+</Base>
