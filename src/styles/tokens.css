@@ -1,15 +1,8 @@
 /* Freehold design tokens (direction C, "Allotment"). See DESIGN.md. */
 :root {
-  --clay: #d4734a; /* ink on clay 5.22:1 */
-  --clay-soft: #d98a63; /* ink on clay-soft 6.38:1 */
-  --ink: #1f1a16;
-  --soil: #2b2420;
-  --chalk: #f6efe4;
-  --sage: #aebf9c; /* washed-out moss, the Manifesto intro. Ink on sage 8.81:1 */
-  --moss: #3f5a3a;
-  --sun: #e8b04a; /* large text or backgrounds only on moss */
-  --sun-light: #f3cf80; /* small labels on moss/soil: 5.14:1 on moss */
-  --grid: rgb(31 26 22 / 7%);
+  /* Colours (--clay, --ink, ...) are defined in src/data/brand.ts and set on
+     :root by Base.astro. Only derived values live here. */
+  --grid: color-mix(in srgb, var(--ink) 7%, transparent);
 
   --font-sans: 'Inter Tight', system-ui, sans-serif;
   --font-mono: 'JetBrains Mono', ui-monospace, monospace;

@@ -1,6 +1,8 @@
 ---
-// The "breakout plot" mark: your plot (chalk) breaks out of the corner of the
-// frame. Held outright, outside anyone else's box. See DESIGN.md.
+// The breakout plot mark with the FREEHOLD wordmark. Shapes and colours come
+// from src/data/brand.ts. See DESIGN.md for what the mark means.
+import { markShapes } from '../data/brand';
+
 interface Props {
   size?: number;
 }
@@ -8,11 +10,14 @@ const { size = 22 } = Astro.props;
 ---
 
 <span class="logo">
-  <svg width={size} height={size} viewBox="0 0 22 22" aria-hidden="true" focusable="false">
-    <rect width="22" height="22" fill="#1f1a16"></rect>
-    <rect x="4" y="4" width="14" height="14" fill="#d4734a"></rect>
-    <rect x="11" y="11" width="11" height="11" fill="#f6efe4"></rect>
-  </svg>
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 22 22"
+    aria-hidden="true"
+    focusable="false"
+    set:html={markShapes()}
+  />
   <span class="word">Freehold</span>
 </span>
 

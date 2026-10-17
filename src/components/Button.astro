@@ -38,7 +38,7 @@ const { href, variant = 'primary', external = false } = Astro.props;
     color: var(--ink);
   }
   .secondary:hover {
-    background: rgb(31 26 22 / 8%);
+    background: color-mix(in srgb, var(--ink) 8%, transparent);
   }
   .on-dark {
     background: transparent;
@@ -46,7 +46,7 @@ const { href, variant = 'primary', external = false } = Astro.props;
     color: var(--chalk);
   }
   .on-dark:hover {
-    background: rgb(246 239 228 / 10%);
+    background: color-mix(in srgb, var(--chalk) 10%, transparent);
   }
   .btn:focus-visible {
     outline: 3px solid currentColor;

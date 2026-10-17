@@ -22,7 +22,7 @@ Make a first-time visitor feel that Freehold is real, built in the open, and som
 
 ## Style foundations
 
-Tokens live in `src/styles/tokens.css`. Always use tokens, never raw hex values in components.
+Colours and the logo mark live in one place: `src/data/brand.ts`. They become CSS custom properties on `:root` (set in `Base.astro`), and the favicon (`src/pages/favicon.svg.ts`) and social image (`pnpm og`) are generated from the same file. Non-colour tokens (type, spacing, sizes) live in `src/styles/tokens.css`. In components, always use `var(--token)`; for see-through tints use `color-mix(in srgb, var(--chalk) 20%, transparent)`. A unit test fails if a raw colour appears anywhere else.
 
 | Token         | Value     | Use                                                                  |
 | ------------- | --------- | -------------------------------------------------------------------- |
@@ -32,6 +32,8 @@ Tokens live in `src/styles/tokens.css`. Always use tokens, never raw hex values 
 | `--soil`      | `#2b2420` | Dark argument sections. Chalk on soil 13.36:1, clay on soil 4.62:1   |
 | `--chalk`     | `#f6efe4` | Light background, text on dark                                       |
 | `--sage`      | `#aebf9c` | Manifesto intro, a washed-out moss. Ink on sage 8.81:1               |
+| `--positive`  | `#b9dfa8` | "Developer preview" tags, "proven" in the walkthrough                |
+| `--negative`  | `#f0a483` | "Not shared" in the walkthrough                                      |
 | `--moss`      | `#3f5a3a` | Status section. Chalk on moss 6.72:1                                 |
 | `--sun`       | `#e8b04a` | Warm highlight sections (ink on sun 8.82:1); large text on moss only |
 | `--sun-light` | `#f3cf80` | Small labels on moss, soil and ink (5.14:1 on moss)                  |
