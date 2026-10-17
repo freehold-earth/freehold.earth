@@ -55,7 +55,7 @@ export const STATUS: readonly StatusItem[] = [
     id: 'local-models',
     label: 'Local model out of the box',
     state: 'in-development',
-    source: 'docs/decisions/006-pci-agent-runtime-targets-and-mobile-story.md',
+    source: 'docs/decisions/006-agent-runtime-targets-and-mobile-story.md',
   },
   {
     id: 'spal-spec',
@@ -134,7 +134,7 @@ export const STATUS: readonly StatusItem[] = [
     id: 'phone-agent',
     label: 'Agent on your phone',
     state: 'planned',
-    source: 'docs/decisions/006-pci-agent-runtime-targets-and-mobile-story.md',
+    source: 'docs/decisions/006-agent-runtime-targets-and-mobile-story.md',
   },
   {
     id: 'community-node-kit',
