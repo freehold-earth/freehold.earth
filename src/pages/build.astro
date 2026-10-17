@@ -1,11 +1,249 @@
 ---
 import Base from '../layouts/Base.astro';
 import Section from '../components/Section.astro';
+import Kicker from '../components/Kicker.astro';
+import Button from '../components/Button.astro';
+import Status from '../components/Status.astro';
+import LayerDiagram from '../components/LayerDiagram.astro';
+import { REPO_URL, TALK_URL } from '../data/site';
+
+const TREE = `${REPO_URL}/tree/main`;
+const BLOB = `${REPO_URL}/blob/main`;
+
+// Every line below is sourced from the freehold repo: README.md directory table,
+// each component README, docs/README.md, ADR-001, 003, 006 and 008. Checked 2026-10-17.
+const layers = [
+  {
+    dir: 'context-store',
+    title: 'Context store',
+    stack: 'TypeScript · Yjs',
+    body: 'Encrypted, local-first storage for your personal context. Data is encrypted at rest with AES-256-GCM. A Yjs sync engine is in place; syncing between your own devices is still in development.',
+    status: ['context-store', 'multi-device-sync'],
+  },
+  {
+    dir: 'agent',
+    title: 'Personal agent',
+    stack: 'Python',
+    body: 'The local AI agent and coordination service. Inference runs locally through llama.cpp or Ollama, and you choose the open model. The coordination API is not authenticated yet.',
+    status: ['agent', 'bring-your-own-model', 'local-models'],
+  },
+  {
+    dir: 'spec',
+    title: 'S-PAL spec',
+    stack: 'JSON Schema · Python',
+    body: 'The Sovereign Privacy and Access Language: a machine-readable policy for what can be shared, with whom, for how long and for what use. Includes the v1.0 schema, a reference encoder and test vectors.',
+    status: ['spal-spec', 'compute-locality'],
+  },
+  {
+    dir: 'contracts',
+    title: 'Policy enforcement',
+    stack: 'Aiken · Cardano',
+    body: 'Validators that enforce S-PAL policies on Cardano, deployable to a local devnet. The current demo verifies off-chain and does not use them yet.',
+    status: ['enforcement-contracts'],
+  },
+  {
+    dir: 'zkp',
+    title: 'Zero-knowledge proofs',
+    stack: 'Compact · TypeScript · Midnight',
+    body: 'Proves facts, like being over 21, without revealing the data behind them. Outside Midnight mainnet the service falls back to placeholder proofs, which is what local development uses.',
+    status: ['zk-proofs'],
+  },
+  {
+    dir: 'identity',
+    title: 'Identity',
+    stack: 'TypeScript · W3C DIDs',
+    body: 'Self-owned identifiers using the did:key method, including single-use identities so services cannot link your visits. Midnight Passport is the planned path for identity anchoring and credentials.',
+    status: ['identity-didkey', 'identity-passport'],
+  },
+];
+
+const adrs = [
+  ['001', 'CRDT framework selection', '001-crdt-framework-selection.md'],
+  ['002', 'Transaction cost management', '002-transaction-cost-management.md'],
+  ['003', 'Blockchain and ZKP stack selection', '003-blockchain-zkp-stack-selection.md'],
+  ['004', 'Infrastructure philosophy', '004-infrastructure-philosophy.md'],
+  [
+    '005',
+    'Cardano L1 vs Midnight sidechain for ZKP',
+    '005-cardano-l1-vs-midnight-sidechain-for-zkp.md',
+  ],
+  [
+    '006',
+    'Agent runtime targets and the mobile story',
+    '006-pci-agent-runtime-targets-and-mobile-story.md',
+  ],
+  ['007', 'Cardano and Midnight interop path', '007-cardano-midnight-interop-path.md'],
+  [
+    '008',
+    'Positioning relative to Midnight Nightframes and Passport',
+    '008-positioning-nightframes-passport.md',
+  ],
+];
 ---
 
-<Base title="Build" description="Build, Freehold.">
-  <Section tone="chalk">
-    <h1>Build</h1>
-    <p>This page is being written.</p>
+<Base
+  title="Build"
+  description="Freehold is open source (Apache-2.0). TypeScript and Python, local-first storage, a local AI agent, S-PAL policies on Cardano and zero-knowledge proofs on Midnight. Developer preview v0.1."
+>
+  <Section tone="clay" grid labelledby="build-title">
+    <Kicker>For builders · Developer preview v0.1</Kicker>
+    <h1 id="build-title">Build with Freehold.</h1>
+    <p class="lede">
+      Freehold is open source under Apache-2.0. It keeps personal context on devices people control,
+      runs AI locally against it, and lets people prove facts about themselves without revealing the
+      data. Every component is tagged v0.1.0 and runs on your machine today.
+    </p>
+    <div class="ctas">
+      <Button href={REPO_URL}>View on GitHub</Button>
+      <Button href={`${REPO_URL}#development`} variant="secondary">
+        Run it locally
+      </Button>
+    </div>
+  </Section>
+
+  <Section tone="chalk" labelledby="layers-heading">
+    <Kicker>Architecture</Kicker>
+    <h2 id="layers-heading">Four layers and an identity.</h2>
+    <LayerDiagram />
+    <div class="layers">
+      {layers.map((l) => (
+        <article class="layer" data-layer={l.dir}>
+          <p class="mono stack">{l.stack}</p>
+          <h3>{l.title}</h3>
+          <p>{l.body}</p>
+          <ul class="statuses">
+            {l.status.map((id) => (
+              <li>
+                <Status id={id} showLabel />
+              </li>
+            ))}
+          </ul>
+          <a class="mono code" href={`${TREE}/${l.dir}`}>
+            {l.dir}/ <span aria-hidden="true">↗</span>
+          </a>
+        </article>
+      ))}
+    </div>
+  </Section>
+
+  <Section tone="ink" labelledby="run-heading">
+    <Kicker>Run it</Kicker>
+    <h2 id="run-heading">Everything runs locally.</h2>
+    <p>
+      The repo is a monorepo with TypeScript packages (pnpm) and Python packages (uv). The age-proof
+      demo brings up the agent, the proof service and a local Cardano devnet. The repo README and
+      each component's README have the current commands; we link to them rather than copy them here
+      so they never go stale.
+    </p>
+    <div class="ctas">
+      <Button href={`${REPO_URL}#development`} variant="on-dark">
+        Development setup
+      </Button>
+      <Button href={`${TREE}/demo`} variant="on-dark">
+        The demo
+      </Button>
+    </div>
+  </Section>
+
+  <Section tone="chalk" grid labelledby="adr-heading">
+    <Kicker>Decided in the open</Kicker>
+    <h2 id="adr-heading">Design decisions.</h2>
+    <p>
+      Every significant choice is written up as an architecture decision record, with the
+      alternatives considered.
+    </p>
+    <ol class="adrs">
+      {adrs.map(([n, title, file]) => (
+        <li data-adr={n}>
+          <a href={`${BLOB}/docs/decisions/${file}`}>
+            <span class="mono">ADR-{n}</span> {title}
+          </a>
+        </li>
+      ))}
+    </ol>
+    <div class="ctas">
+      <Button href={`${TREE}/spec`}>Read the S-PAL spec</Button>
+      <Button href={`${TREE}/docs`} variant="secondary">
+        All docs
+      </Button>
+    </div>
+  </Section>
+
+  <Section tone="sun" labelledby="contribute-heading">
+    <Kicker>Contribute</Kicker>
+    <h2 id="contribute-heading">Pick something up.</h2>
+    <p>
+      Freehold is early and maintained in the open. Issues, questions and pull requests are welcome.
+    </p>
+    <div class="ctas">
+      <Button href={`${REPO_URL}/issues`}>Browse issues</Button>
+      <Button href={TALK_URL} variant="secondary">
+        Ask a question
+      </Button>
+    </div>
   </Section>
 </Base>
+
+<style>
+  .lede {
+    max-width: 58ch;
+  }
+  .ctas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+    margin-top: var(--space-5);
+  }
+  .layers {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
+    gap: var(--space-4);
+    margin-top: var(--space-6);
+  }
+  .layer {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    padding: var(--space-5);
+    border: 2px solid var(--ink);
+    background: rgb(255 255 255 / 40%);
+  }
+  .layer h3,
+  .layer p {
+    margin: 0;
+  }
+  .stack {
+    opacity: 0.8;
+  }
+  .statuses {
+    list-style: none;
+    margin: var(--space-2) 0;
+    padding: 0;
+    display: grid;
+    gap: var(--space-2);
+    font-size: 0.9rem;
+  }
+  .code {
+    margin-top: auto;
+  }
+  .adrs {
+    list-style: none;
+    margin: var(--space-5) 0 0;
+    padding: 0;
+    border-top: 2px solid var(--ink);
+  }
+  .adrs li {
+    border-bottom: 1px solid rgb(31 26 22 / 20%);
+  }
+  .adrs a {
+    display: block;
+    padding: var(--space-3) 0;
+    text-decoration: none;
+  }
+  .adrs a:hover {
+    text-decoration: underline;
+  }
+  .adrs .mono {
+    margin-right: var(--space-3);
+  }
+</style>

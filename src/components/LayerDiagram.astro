@@ -1,0 +1,84 @@
+---
+// Layers as described in the freehold README directory table (Layer 1 to 4)
+// plus identity alongside. Colours mirror tokens in src/styles/tokens.css.
+const layers = [
+  { n: '1', name: 'Context store', note: 'Your encrypted data' },
+  { n: '2', name: 'Personal agent', note: 'Your AI, on your hardware' },
+  { n: '3', name: 'Policy enforcement', note: 'S-PAL rules on Cardano' },
+  { n: '4', name: 'Proofs', note: 'Zero-knowledge, on Midnight' },
+];
+const h = 64;
+const gap = 10;
+---
+
+<svg
+  role="img"
+  aria-labelledby="layers-title layers-desc"
+  viewBox={`0 0 640 ${layers.length * (h + gap) + 10}`}
+  class="diagram"
+>
+  <title id="layers-title">The Freehold layers</title>
+  <desc id="layers-desc">
+    Four stacked layers: 1 context store, 2 personal agent, 3 policy enforcement on Cardano, 4
+    zero-knowledge proofs on Midnight. Identity runs alongside all four.
+  </desc>
+  {layers.map((l, i) => {
+    const y = 5 + i * (h + gap);
+    return (
+      <g>
+        <rect
+          x="5"
+          y={y}
+          width="480"
+          height={h}
+          fill={i % 2 ? '#d98a63' : '#d4734a'}
+          stroke="#1f1a16"
+          stroke-width="2"
+        />
+        <text x="22" y={y + 27} class="num">{`LAYER ${l.n}`}</text>
+        <text x="22" y={y + 50} class="name">
+          {l.name}
+        </text>
+        <text x="470" y={y + 50} class="note" text-anchor="end">
+          {l.note}
+        </text>
+      </g>
+    );
+  })}
+  <rect
+    x="500"
+    y="5"
+    width="135"
+    height={layers.length * (h + gap) - gap}
+    fill="#f6efe4"
+    stroke="#1f1a16"
+    stroke-width="2"
+  />
+  <text x="567" y="140" class="name" text-anchor="middle">
+    Identity
+  </text>
+  <text x="567" y="162" class="num" text-anchor="middle">
+    DID:KEY
+  </text>
+</svg>
+
+<style>
+  .diagram {
+    width: 100%;
+    height: auto;
+    max-width: 40rem;
+  }
+  .num {
+    font: 600 11px var(--font-mono);
+    letter-spacing: 0.08em;
+    fill: #1f1a16;
+  }
+  .name {
+    font: 800 19px var(--font-sans);
+    fill: #1f1a16;
+  }
+  .note {
+    font: 400 14px var(--font-sans);
+    fill: #1f1a16;
+  }
+</style>
