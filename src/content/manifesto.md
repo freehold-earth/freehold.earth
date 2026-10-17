@@ -12,7 +12,7 @@ Privacy policies were meant to protect us. Nobody reads them, they change whenev
 
 ## Freehold, not leasehold
 
-In property, a leaseholder lives somewhere on someone else's terms. The landlord sets the rules, can raise the rent and can, in the end, take it back. A freeholder owns the ground outright.
+In England and Wales, many people buy a leasehold home. They pay for it, but not for the ground it stands on, and they own it only for a set number of years. The freeholder can set rules and pass on charges, and as the lease runs down, keeping hold of the home costs more. You paid for it, yet it is never quite yours. A freeholder owns the home and the ground outright.
 
 Today we are all leaseholders of our own lives online. Freehold is a way to hold your context outright: on your own devices, worked on by your own AI, shared only on your terms, and supported by infrastructure your community owns.
 
@@ -28,7 +28,7 @@ Capable open AI models now run on ordinary laptops, and they are reaching phones
 
 ### Rules as maths, not promises
 
-When a service wants something from you, your rules decide what it gets. Freehold describes those rules in an open, machine-readable policy language, with the working name S-PAL: what may be shared, with whom, for how long, and for what purpose.
+When a service wants something from you, your rules decide what it gets. Freehold describes those rules in an open, machine-readable policy language, with the working name S-PAL (Sovereign Privacy and Access Language): what may be shared, with whom, for how long, and for what purpose.
 
 Every time you deal with a service, Freehold uses a fresh one-time identity, so services cannot follow you around or quietly build a profile of you. Only you hold the link back to your real identity, and you can prove a one-time identity was yours if you ever need to.
 
