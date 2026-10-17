@@ -16,6 +16,11 @@ export default defineConfig({
       name: 'mobile',
       use: { ...devices['Desktop Chrome'], viewport: { width: 390, height: 844 } },
     },
+    // The owner reviews on Firefox on an iPhone-sized screen.
+    {
+      name: 'firefox-phone',
+      use: { ...devices['Desktop Firefox'], viewport: { width: 402, height: 874 } },
+    },
   ],
   webServer: {
     command: 'node scripts/serve-dist.mjs',

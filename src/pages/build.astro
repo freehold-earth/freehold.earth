@@ -29,16 +29,16 @@ const layers = [
   },
   {
     dir: 'spec',
-    title: 'S-PAL spec',
-    stack: 'JSON Schema · Python',
-    body: 'The Sovereign Privacy and Access Language: a machine-readable policy for what can be shared, with whom, for how long and for what use. Includes the v1.0 schema, a reference encoder and test vectors.',
+    title: 'Privacy rules language',
+    stack: 'S-PAL · JSON Schema · Python',
+    body: 'A machine-readable way to say what can be shared, with whom, for how long and for what use. Its working name is S-PAL (Sovereign Privacy and Access Language), and it is a proposal, not an established standard. Includes the v1.0 schema, a reference encoder and test vectors.',
     status: ['spal-spec', 'compute-locality'],
   },
   {
     dir: 'contracts',
     title: 'Policy enforcement',
     stack: 'Aiken · Cardano',
-    body: 'Validators that enforce S-PAL policies on Cardano, deployable to a local devnet. The current demo verifies off-chain and does not use them yet.',
+    body: 'Validators that enforce privacy rules on Cardano, deployable to a local devnet. The current demo verifies off-chain and does not use them yet.',
     status: ['enforcement-contracts'],
   },
   {
@@ -83,7 +83,7 @@ const adrs = [
 
 <Base
   title="Build"
-  description="Freehold is open source (Apache-2.0). TypeScript and Python, local-first storage, a local AI agent, S-PAL policies on Cardano and zero-knowledge proofs on Midnight. Developer preview v0.1."
+  description="Freehold is open source (Apache-2.0). TypeScript and Python, local-first storage, a local AI agent, privacy rules enforced on Cardano and zero-knowledge proofs on Midnight. Developer preview v0.1."
 >
   <Section tone="clay" grid labelledby="build-title">
     <Kicker>For builders · Developer preview v0.1</Kicker>
@@ -162,7 +162,7 @@ const adrs = [
       ))}
     </ol>
     <div class="ctas">
-      <Button href={`${TREE}/spec`}>Read the S-PAL spec</Button>
+      <Button href={`${TREE}/spec`}>Read the privacy rules spec</Button>
       <Button href={`${TREE}/docs`} variant="secondary">
         All docs
       </Button>

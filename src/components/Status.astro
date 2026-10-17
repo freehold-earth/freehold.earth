@@ -18,10 +18,21 @@ const item = getStatus(id);
 
 <style>
   .status-wrap {
-    display: inline-flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: var(--space-2);
+    display: inline-grid;
+    grid-auto-flow: column;
+    grid-template-columns: minmax(0, 1fr);
+    align-items: start;
+    gap: var(--space-3);
+    width: 100%;
+  }
+  .status-wrap:not(:has(.item)) {
+    width: auto;
+  }
+  .item {
+    padding-top: 0.1rem;
+  }
+  .tag {
+    justify-self: end;
   }
   .tag {
     display: inline-block;

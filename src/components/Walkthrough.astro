@@ -55,44 +55,46 @@ const received = [
 </figure>
 
 <script>
+  // Enhances the static list into a one-step-at-a-time walkthrough. All steps
+  // share one grid cell, so the box is always as tall as the tallest step and
+  // the controls never move.
   const fig = document.querySelector<HTMLElement>('.walk');
   if (fig) {
     const steps = [...fig.querySelectorAll<HTMLElement>('[data-step]')];
     let current = 0;
 
-    const controls = document.createElement('div');
-    controls.className = 'controls';
+    const button = (text: string) =>
+      Object.assign(document.createElement('button'), { type: 'button', textContent: text });
+    const prev = button('Back');
+    const next = button('Next');
+    const restart = button('Start again');
     const counter = document.createElement('p');
     counter.className = 'mono counter';
     counter.textContent = `Step 1 of ${steps.length}`;
-    const prev = Object.assign(document.createElement('button'), {
-      type: 'button',
-      textContent: 'Back',
-    });
-    const next = Object.assign(document.createElement('button'), {
-      type: 'button',
-      textContent: 'Next',
-    });
-    const restart = Object.assign(document.createElement('button'), {
-      type: 'button',
-      textContent: 'Start again',
-    });
-    controls.append(prev, next, restart, counter);
+    const forward = document.createElement('div');
+    forward.className = 'forward';
+    forward.append(next, restart);
+    const controls = document.createElement('div');
+    controls.className = 'controls';
+    controls.append(prev, counter, forward);
     fig.append(controls);
 
     const show = (i: number) => {
       current = i;
-      steps.forEach((s, n) => (s.hidden = n !== i));
+      steps.forEach((s, n) => {
+        s.classList.toggle('is-current', n === i);
+        s.inert = n !== i;
+      });
       counter.textContent = `Step ${i + 1} of ${steps.length}`;
-      prev.hidden = i === 0;
+      prev.classList.toggle('is-off', i === 0);
       next.hidden = i === steps.length - 1;
       restart.hidden = i !== steps.length - 1;
     };
 
-    // Keep keyboard focus on a visible control when the pressed one hides itself.
+    // Keep keyboard focus on a usable control when the pressed one goes away.
     prev.addEventListener('click', () => {
       show(Math.max(0, current - 1));
-      if (prev.hidden) next.focus();
+      if (current === 0) next.focus();
     });
     next.addEventListener('click', () => {
       show(Math.min(steps.length - 1, current + 1));
@@ -169,13 +171,14 @@ const received = [
     opacity: 0.8;
   }
   .walk :global(.controls) {
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
     align-items: center;
     gap: var(--space-3);
     margin-top: var(--space-5);
   }
   .walk :global(.controls button) {
+    min-width: 8.5rem;
     padding: 0.65rem 1rem;
     border: 2px solid var(--chalk);
     background: transparent;
@@ -190,14 +193,45 @@ const received = [
   .walk :global(.controls button:hover) {
     background: rgb(246 239 228 / 10%);
   }
+  .walk :global(.controls button.is-off) {
+    visibility: hidden;
+  }
   .walk :global(.controls button[hidden]) {
     display: none;
   }
   .walk :global(.counter) {
-    margin: 0 0 0 auto;
+    margin: 0;
+    text-align: center;
     opacity: 0.85;
   }
-  .walk[data-enhanced] .steps li[hidden] {
-    display: none;
+  .walk[data-enhanced] .steps {
+    grid-template-areas: 'step';
+  }
+  .walk[data-enhanced] .steps li {
+    grid-area: step;
+  }
+  .walk[data-enhanced] .steps li:not(.is-current) {
+    visibility: hidden;
+  }
+  /* Narrow screens: counter on its own row so the two buttons fit. */
+  @media (max-width: 26rem) {
+    .walk :global(.controls) {
+      grid-template-columns: auto auto;
+      justify-content: space-between;
+      grid-template-areas: 'counter counter' 'back forward';
+    }
+    .walk :global(.counter) {
+      grid-area: counter;
+    }
+    .walk :global(.controls > button) {
+      grid-area: back;
+    }
+    .walk :global(.forward) {
+      grid-area: forward;
+    }
+    .walk :global(.controls button) {
+      min-width: 7rem;
+      padding-inline: 0.6rem;
+    }
   }
 </style>

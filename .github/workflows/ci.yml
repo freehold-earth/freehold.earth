@@ -19,7 +19,7 @@ jobs:
           node-version: 24
           cache: pnpm
       - run: pnpm install --frozen-lockfile
-      - run: pnpm exec playwright install --with-deps chromium
+      - run: pnpm exec playwright install --with-deps chromium firefox
       - run: pnpm verify
       - name: Status sources still exist in the freehold repo
         run: pnpm check:sources

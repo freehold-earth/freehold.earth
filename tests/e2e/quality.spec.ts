@@ -63,7 +63,7 @@ for (const path of PAGES) {
         };
         const out: string[] = [];
         for (const el of document.querySelectorAll<HTMLElement>('a[href], button')) {
-          if (!el.offsetParent) continue;
+          if (!el.offsetParent || getComputedStyle(el).visibility === 'hidden') continue;
           el.focus({ focusVisible: true } as FocusOptions);
           const s = getComputedStyle(el);
           if (s.outlineStyle === 'none') {

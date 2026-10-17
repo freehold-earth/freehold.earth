@@ -58,4 +58,17 @@ describe('built site for GitHub Pages', () => {
     }
     expect(offenders).toEqual([]);
   });
+
+  it('uses the coined name S-PAL only where it is explained', () => {
+    const offenders = htmlFiles(DIST).filter((file) => {
+      const explained = ['build', 'manifesto'].some((p) => file.endsWith(join(p, 'index.html')));
+      return (
+        !explained &&
+        readFileSync(file, 'utf8')
+          .replace(/<[^>]+>/g, ' ')
+          .includes('S-PAL')
+      );
+    });
+    expect(offenders).toEqual([]);
+  });
 });

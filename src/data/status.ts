@@ -58,7 +58,7 @@ export const STATUS: readonly StatusItem[] = [
   },
   {
     id: 'spal-spec',
-    label: 'S-PAL policy spec',
+    label: 'A language for your privacy rules',
     state: 'preview',
     source: 'spec/README.md',
     link: `${TREE}/spec`,

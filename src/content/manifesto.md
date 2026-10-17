@@ -28,7 +28,7 @@ Capable open AI models now run on ordinary laptops, and they are reaching phones
 
 ### Rules as maths, not promises
 
-When a service wants something from you, your rules decide what it gets. Freehold describes those rules in an open, machine-readable policy language called S-PAL: what may be shared, with whom, for how long, and for what purpose.
+When a service wants something from you, your rules decide what it gets. Freehold describes those rules in an open, machine-readable policy language, with the working name S-PAL: what may be shared, with whom, for how long, and for what purpose.
 
 Often a service does not need your data at all, only a fact about it. A shop needs to know you are over 21, not your date of birth. With zero-knowledge proofs your device can prove the fact and reveal nothing else. Where rules need to be enforced beyond your own device, Freehold uses public cryptographic networks as an anchor, never as a home: your data does not live there, and your life does not stop if a network has a bad day.
 
@@ -52,7 +52,7 @@ Freehold builds on others' work rather than starting from nothing: open AI model
 
 ## Honest about where we are
 
-Freehold is a developer preview. Every layer exists and runs on a developer's machine today: encrypted local storage, a personal AI agent, the S-PAL policy language, policy enforcement, zero-knowledge proofs and self-owned identity. A working demo shows a shop confirming someone is over 21 without learning their birthday.
+Freehold is a developer preview. Every layer exists and runs on a developer's machine today: encrypted local storage, a personal AI agent, the privacy rules language, policy enforcement, zero-knowledge proofs and self-owned identity. A working demo shows a shop confirming someone is over 21 without learning their birthday.
 
 It is not yet ready for everyday use. Some steps in the demo are simulated on a local test setup. Syncing between your own devices is still being built. There is no ready-made kit for a library or co-op to run a node, and no outside services accept Freehold yet. We would rather say so plainly than promise what does not exist. The status of every part is published on this site and updated as things ship.
 
