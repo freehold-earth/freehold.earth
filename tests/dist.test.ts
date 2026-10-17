@@ -71,4 +71,10 @@ describe('built site for GitHub Pages', () => {
     });
     expect(offenders).toEqual([]);
   });
+
+  it('uses the breakout plot mark in the header and favicon', () => {
+    const breakout = /<rect x="11" y="11" width="11" height="11" fill="#f6efe4"/;
+    expect(readFileSync(join(DIST, 'favicon.svg'), 'utf8')).toMatch(breakout);
+    expect(readFileSync(join(DIST, 'index.html'), 'utf8')).toMatch(breakout);
+  });
 });

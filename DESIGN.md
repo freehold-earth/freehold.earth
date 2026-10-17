@@ -12,6 +12,7 @@ Make a first-time visitor feel that Freehold is real, built in the open, and som
 - Audiences: everyday people (lead with community and sovereignty), builders (precise and technical), communities that might host a node.
 - Surface: static marketing site, four pages (Home, Build, Communities, Manifesto).
 - Metaphor: land you own outright. Plots, allotments, the village hall. "Freehold, not leasehold."
+- Logo: the breakout plot. An ink frame around a clay field, with your plot (chalk) breaking out of the bottom-right corner, past the boundary. It stands for holding your data outright and breaking out of the box that data controls and context mining put people in. Avoid any 2x2 grid of squares (too close to Greggs' long-standing four-square mark in the UK).
 - Our own identity: don't borrow another organisation's colours, marks, fonts or slogans.
 
 ## Style foundations
@@ -53,7 +54,7 @@ Light theme only. The palette is the brand.
 - `Kicker`: mono uppercase label above headings; switches to `--sun-light` on dark tones.
 - `Status` (`id`): tag showing Developer preview, In development or Planned, from `src/data/status.ts`.
 - `GatedCta` (`statusId`, `href`): live button only when the item is a developer preview; otherwise "Coming soon" plus "Watch on GitHub".
-- `Header`, `Footer`, `Logo`: the plots mark (four plots, the chalk one is yours) with the FREEHOLD wordmark.
+- `Header`, `Footer`, `Logo`: the breakout plot mark with the FREEHOLD wordmark. The same mark is in `public/favicon.svg` and `scripts/make-og.mjs` (run `pnpm og` after changing it).
 
 ## Accessibility
 

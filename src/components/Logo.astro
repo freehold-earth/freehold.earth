@@ -1,5 +1,6 @@
 ---
-// The "plots" mark: four plots of land, one held by you (chalk).
+// The "breakout plot" mark: your plot (chalk) breaks out of the corner of the
+// frame. Held outright, outside anyone else's box. See DESIGN.md.
 interface Props {
   size?: number;
 }
@@ -9,10 +10,8 @@ const { size = 22 } = Astro.props;
 <span class="logo">
   <svg width={size} height={size} viewBox="0 0 22 22" aria-hidden="true" focusable="false">
     <rect width="22" height="22" fill="#1f1a16"></rect>
-    <rect x="4" y="4" width="6" height="6" fill="#d4734a"></rect>
-    <rect x="12" y="4" width="6" height="6" fill="#d4734a"></rect>
-    <rect x="4" y="12" width="6" height="6" fill="#d4734a"></rect>
-    <rect x="12" y="12" width="6" height="6" fill="#f6efe4"></rect>
+    <rect x="4" y="4" width="14" height="14" fill="#d4734a"></rect>
+    <rect x="11" y="11" width="11" height="11" fill="#f6efe4"></rect>
   </svg>
   <span class="word">Freehold</span>
 </span>
