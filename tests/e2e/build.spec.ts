@@ -30,6 +30,28 @@ test.describe('build page', () => {
     await expect(diagram).toHaveAccessibleName(/layers/i);
   });
 
+  test('identity is a spine through every layer, each layer its own colour', async ({ page }) => {
+    await page.goto('/build/');
+    const result = await page.locator('.diagram').evaluate((root) => {
+      const spine = root.querySelector('.spine')!.getBoundingClientRect();
+      const layers = [...root.querySelectorAll('.stack li')];
+      return {
+        count: layers.length,
+        colours: new Set(layers.map((l) => getComputedStyle(l).backgroundColor)).size,
+        pierced: layers.every((l) => {
+          const r = l.getBoundingClientRect();
+          return (
+            spine.top <= r.top &&
+            spine.bottom >= r.bottom &&
+            spine.left >= r.left &&
+            spine.right <= r.right
+          );
+        }),
+      };
+    });
+    expect(result).toEqual({ count: 4, colours: 4, pierced: true });
+  });
+
   test('keeps diagram text readable on a 320px phone', async ({ page }) => {
     await page.setViewportSize({ width: 320, height: 800 });
     await page.goto('/build/');
