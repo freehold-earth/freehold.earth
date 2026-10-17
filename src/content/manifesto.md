@@ -40,7 +40,7 @@ There is a middle path that people already know how to build. Communities run th
 
 This matters more now than ever. AI datacentres are arriving in towns that get the noise, the power bills and the water use, while the value and the data flow somewhere else. Infrastructure can be renegotiated over time. Data, once extracted, is gone for good. The answer is not to refuse infrastructure, but to own it.
 
-It is not a new idea. Community networks in Catalonia have grown to tens of thousands of nodes. A neighbourhood in Barcelona runs its own server for email, files and calendars. Rural communities in the UK have built their own local cloud. Freehold is designed so that kind of community can hold its members' data and run their AI too, with the same rules and the same guarantees as a device in your pocket.
+It is not a new idea. Community networks in Catalonia have grown to tens of thousands of nodes. A neighbourhood in Barcelona runs its own server for email, files and calendars. Rural communities in the UK have built their own local cloud. Freehold is designed so that kind of community can hold its members' data and run their AI too, run by people they know, under rules they agree.
 
 ## Open by default
 

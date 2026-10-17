@@ -26,3 +26,10 @@ test.describe('manifesto', () => {
     await expect(page.locator('main a[href="/communities/"]').first()).toBeVisible();
   });
 });
+
+test('does not promise community nodes the same guarantees as your own device', async ({
+  page,
+}) => {
+  await page.goto('/manifesto/');
+  await expect(page.locator('main')).not.toContainText('same guarantees');
+});

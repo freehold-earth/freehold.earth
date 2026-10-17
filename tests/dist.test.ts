@@ -46,4 +46,16 @@ describe('built site for GitHub Pages', () => {
     }
     expect(foreign).toEqual([]);
   });
+
+  it('names chains and contract languages only on the Build page', () => {
+    const offenders: string[] = [];
+    for (const file of htmlFiles(DIST)) {
+      if (file.endsWith(join('build', 'index.html'))) continue;
+      const text = readFileSync(file, 'utf8').replace(/<[^>]+>/g, ' ');
+      for (const word of ['Cardano', 'Midnight', 'Aiken']) {
+        if (text.includes(word)) offenders.push(`${file}: ${word}`);
+      }
+    }
+    expect(offenders).toEqual([]);
+  });
 });

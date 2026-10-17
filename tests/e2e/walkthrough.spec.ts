@@ -49,3 +49,23 @@ test.describe('age-proof walkthrough', () => {
     expect(duration).toBe('0s');
   });
 });
+
+test.describe('walkthrough focus', () => {
+  test('keeps focus on a visible button at the last step', async ({ page }) => {
+    await page.goto('/');
+    const next = page.getByRole('button', { name: 'Next' });
+    await next.focus();
+    for (let i = 0; i < 3; i++) await page.keyboard.press('Enter');
+    const focused = await page.evaluate(() => document.activeElement?.textContent);
+    expect(focused).toBe('Start again');
+  });
+
+  test('keeps focus on a visible button after going back to the first step', async ({ page }) => {
+    await page.goto('/');
+    await page.getByRole('button', { name: 'Next' }).click();
+    await page.getByRole('button', { name: 'Back' }).focus();
+    await page.keyboard.press('Enter');
+    const focused = await page.evaluate(() => document.activeElement?.textContent);
+    expect(focused).toBe('Next');
+  });
+});

@@ -89,8 +89,15 @@ const received = [
       restart.hidden = i !== steps.length - 1;
     };
 
-    prev.addEventListener('click', () => show(Math.max(0, current - 1)));
-    next.addEventListener('click', () => show(Math.min(steps.length - 1, current + 1)));
+    // Keep keyboard focus on a visible control when the pressed one hides itself.
+    prev.addEventListener('click', () => {
+      show(Math.max(0, current - 1));
+      if (prev.hidden) next.focus();
+    });
+    next.addEventListener('click', () => {
+      show(Math.min(steps.length - 1, current + 1));
+      if (next.hidden) restart.focus();
+    });
     restart.addEventListener('click', () => {
       show(0);
       next.focus();

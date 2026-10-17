@@ -24,3 +24,18 @@ test.describe('communities page', () => {
     await expect(page.locator('main')).toContainText('not affiliated');
   });
 });
+
+test.describe('communities honesty', () => {
+  test('makes no operator-blind security claim', async ({ page }) => {
+    await page.goto('/communities/');
+    await expect(page.locator('main')).not.toContainText('cannot read it');
+  });
+
+  test('marks rules about where data is processed as planned where they are described', async ({
+    page,
+  }) => {
+    await page.goto('/communities/');
+    const tiers = page.locator('section', { has: page.locator('#tiers-heading') });
+    await expect(tiers.locator('[data-state="planned"]')).toHaveCount(1);
+  });
+});

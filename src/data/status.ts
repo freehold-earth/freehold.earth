@@ -86,7 +86,7 @@ export const STATUS: readonly StatusItem[] = [
   },
   {
     id: 'identity-passport',
-    label: 'Midnight Passport identity',
+    label: 'Verified identity credentials',
     state: 'planned',
     source: 'docs/decisions/008-positioning-nightframes-passport.md',
   },

@@ -33,7 +33,7 @@ const tiers = [
   ],
   [
     'Commercial cloud',
-    'Only as a last resort, and only if your rules allow it.',
+    'Only as a last resort, by your choice.',
     'Convenient, at a cost to sovereignty.',
   ],
 ];
@@ -64,8 +64,8 @@ const hosts = [
       you know, that holds your encrypted data and runs AI for its members.
     </p>
     <p>
-      Freehold is designed so your data is encrypted before it reaches that machine, so the people
-      running it cannot read it. Your rules still decide what leaves it.
+      Your rules decide what leaves your devices, and the node is run by people you know, under
+      rules your community agrees.
     </p>
     <ul class="hosts">
       {hosts.map(([who, why]) => (
@@ -81,8 +81,11 @@ const hosts = [
     <Kicker>From your phone to your town</Kicker>
     <h2 id="tiers-heading">Run it where it makes sense.</h2>
     <p>
-      Freehold works at every scale. You choose, and your rules can say which of these may handle
-      which parts of your data.
+      Freehold is designed to work at every scale, and you choose. Your rules will be able to say
+      which of these may handle which parts of your data.
+    </p>
+    <p class="locality">
+      <Status id="compute-locality" showLabel />
     </p>
     <ol class="tiers">
       {tiers.map(([name, what, trade], i) => (
