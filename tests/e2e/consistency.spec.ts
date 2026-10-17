@@ -46,7 +46,7 @@ test('each page has its own intro colour, shared with its header', async ({ page
   expect(colours[3]).toBe('rgb(174, 191, 156)');
 });
 
-test('every page ends with the green status section, then the yellow call to action', async ({
+test('every page ends with the dark status section, then the clay call to action', async ({
   page,
 }) => {
   const ends: string[] = [];
@@ -61,7 +61,8 @@ test('every page ends with the green status section, then the yellow call to act
     );
   }
   expect(new Set(ends).size, ends.join(' | ')).toBe(1);
-  expect(ends[0]).toBe('rgb(63, 90, 58) > rgb(232, 176, 74)');
+  // Soil then clay. Not green then gold: over the black footer that reads as a flag.
+  expect(ends[0]).toBe('rgb(43, 36, 32) > rgb(212, 115, 74)');
 });
 
 test('light body sections always carry the plot grid', async ({ page }) => {

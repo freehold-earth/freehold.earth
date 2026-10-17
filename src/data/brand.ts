@@ -7,12 +7,11 @@ export const COLOURS = {
   clay: '#d4734a', // ink on clay 5.22:1
   'clay-soft': '#d98a63', // ink 6.38:1
   sun: '#e8b04a', // ink 8.82:1
-  sage: '#aebf9c', // ink 8.81:1
+  sage: '#aebf9c', // ink 8.81:1, Manifesto intro
   ink: '#1f1a16',
   soil: '#2b2420', // chalk on soil 13.36:1
   chalk: '#f6efe4',
-  moss: '#3f5a3a', // chalk on moss 6.72:1
-  'sun-light': '#f3cf80', // small labels on moss, soil and ink
+  'sun-light': '#f3cf80', // small labels on soil and ink
   positive: '#b9dfa8', // "developer preview" tags and "proven" in the walkthrough
   negative: '#f0a483', // "not shared" in the walkthrough
 } as const;

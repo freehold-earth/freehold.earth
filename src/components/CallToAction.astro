@@ -1,5 +1,5 @@
 ---
-// The yellow band every page ends on: one clear next step.
+// The clay band every page ends on: one clear next step.
 import Section from './Section.astro';
 import Kicker from './Kicker.astro';
 
@@ -11,7 +11,7 @@ interface Props {
 const { kicker, title, id = 'next' } = Astro.props;
 ---
 
-<Section tone="sun" id={id} labelledby={`${id}-title`}>
+<Section tone="clay" id={id} labelledby={`${id}-title`}>
   <Kicker>{kicker}</Kicker>
   <h2 id={`${id}-title`} class="title">
     {title}

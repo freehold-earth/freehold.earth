@@ -24,20 +24,19 @@ Make a first-time visitor feel that Freehold is real, built in the open, and som
 
 Colours and the logo mark live in one place: `src/data/brand.ts`. They become CSS custom properties on `:root` (set in `Base.astro`), and the favicon (`src/pages/favicon.svg.ts`) and social image (`pnpm og`) are generated from the same file. Non-colour tokens (type, spacing, sizes) live in `src/styles/tokens.css`. In components, always use `var(--token)`; for see-through tints use `color-mix(in srgb, var(--chalk) 20%, transparent)`. A unit test fails if a raw colour appears anywhere else.
 
-| Token         | Value     | Use                                                                  |
-| ------------- | --------- | -------------------------------------------------------------------- |
-| `--clay`      | `#d4734a` | Hero, header, highlighted cards. Ink on clay 5.22:1                  |
-| `--clay-soft` | `#d98a63` | Secondary warm sections. Ink on clay-soft 6.38:1                     |
-| `--ink`       | `#1f1a16` | Text, primary buttons, dark sections                                 |
-| `--soil`      | `#2b2420` | Dark argument sections. Chalk on soil 13.36:1, clay on soil 4.62:1   |
-| `--chalk`     | `#f6efe4` | Light background, text on dark                                       |
-| `--sage`      | `#aebf9c` | Manifesto intro, a washed-out moss. Ink on sage 8.81:1               |
-| `--positive`  | `#b9dfa8` | "Developer preview" tags, "proven" in the walkthrough                |
-| `--negative`  | `#f0a483` | "Not shared" in the walkthrough                                      |
-| `--moss`      | `#3f5a3a` | Status section. Chalk on moss 6.72:1                                 |
-| `--sun`       | `#e8b04a` | Warm highlight sections (ink on sun 8.82:1); large text on moss only |
-| `--sun-light` | `#f3cf80` | Small labels on moss, soil and ink (5.14:1 on moss)                  |
-| `--grid`      | ink @ 7%  | 44px plot-grid texture on clay and chalk                             |
+| Token         | Value     | Use                                                                |
+| ------------- | --------- | ------------------------------------------------------------------ |
+| `--clay`      | `#d4734a` | Hero, header, highlighted cards. Ink on clay 5.22:1                |
+| `--clay-soft` | `#d98a63` | Secondary warm sections. Ink on clay-soft 6.38:1                   |
+| `--ink`       | `#1f1a16` | Text, primary buttons, dark sections                               |
+| `--soil`      | `#2b2420` | Dark argument sections. Chalk on soil 13.36:1, clay on soil 4.62:1 |
+| `--chalk`     | `#f6efe4` | Light background, text on dark                                     |
+| `--sage`      | `#aebf9c` | Manifesto intro, a soft sage. Ink on sage 8.81:1                   |
+| `--positive`  | `#b9dfa8` | "Developer preview" tags, "proven" in the walkthrough              |
+| `--negative`  | `#f0a483` | "Not shared" in the walkthrough                                    |
+| `--sun`       | `#e8b04a` | Communities intro, "In development" tags. Ink on sun 8.82:1        |
+| `--sun-light` | `#f3cf80` | Small labels on soil and ink                                       |
+| `--grid`      | ink @ 7%  | 44px plot-grid texture on clay and chalk                           |
 
 The clay was lightened from the mockup's `#c8643b` (ink on it was 4.39:1, below AA).
 
@@ -62,7 +61,9 @@ Every page follows the same rhythm, so differences between pages are intentional
 1. **Intro (`PageHero`)**: same structure, spacing and height on every page (`--hero-height`), top-aligned so the tagline and title never move. This is where pages differ on purpose: each page has its own warm intro tone, and the header takes the same tone (`Base` `tone` prop must match `PageHero` `tone`).
    - Home: `clay` · Communities: `sun` · Build: `clay-soft` · Manifesto: `sage` · 404: `clay`
 2. **Body**: light sections are always `chalk` with the plot grid (`Section` adds the grid automatically). Dark sections (`ink`, `soil`) are for contrast and arguments.
-3. **Ending**: every page ends with the green status section (`BuiltInOpen` or a page-specific `moss` section) and then the yellow call to action (`CallToAction` or a `sun` section), before the footer.
+3. **Ending**: every page ends with the dark status section (`BuiltInOpen` or a page-specific `soil` section) and then the clay call to action (`CallToAction` or a `clay` section), before the footer. Pages open and close on warm colour.
+
+Avoid stacking large green, gold and black blocks: together they read as the Jamaican or pan-African flag. Green appears only in small accents ("Developer preview" tags) and the pale sage Manifesto intro.
 
 Tests in `tests/e2e/consistency.spec.ts` enforce all three.
 
