@@ -1,11 +1,54 @@
 ---
 import Base from '../layouts/Base.astro';
 import Section from '../components/Section.astro';
+import Kicker from '../components/Kicker.astro';
+import Button from '../components/Button.astro';
+import { Content } from '../content/manifesto.md';
+import { REPO_URL } from '../data/site';
+import '../styles/prose.css';
+
+// Web edition of docs/concepts/manifesto.md, rewritten for the site.
+// Claims checked against status.ts and the freehold repo, 2026-10-17.
+const ORIGINAL = `${REPO_URL}/blob/main/docs/concepts/manifesto.md`;
 ---
 
-<Base title="Manifesto" description="Manifesto, Freehold.">
+<Base
+  title="Manifesto"
+  description="Freehold, not leasehold. Why your context should live on your devices, be worked on by your own AI, and be shared only on your terms."
+>
+  <Section tone="clay" grid labelledby="m-title">
+    <Kicker>Manifesto</Kicker>
+    <h1 id="m-title">Freehold, not leasehold.</h1>
+    <p class="lede">Owning your data, your AI and the infrastructure they run on.</p>
+  </Section>
   <Section tone="chalk">
-    <h1>Manifesto</h1>
-    <p>This page is being written.</p>
+    <article class="prose">
+      <Content />
+    </article>
+    <aside class="more">
+      <p class="mono">Read more</p>
+      <div class="ctas">
+        <Button href="/build/">How it's built</Button>
+        <Button href="/communities/" variant="secondary">
+          Community nodes
+        </Button>
+        <Button href={ORIGINAL} variant="secondary">
+          The full original manifesto
+        </Button>
+      </div>
+    </aside>
   </Section>
 </Base>
+
+<style>
+  .more {
+    margin-top: var(--space-7);
+    padding-top: var(--space-5);
+    border-top: 2px solid var(--ink);
+  }
+  .ctas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+  }
+</style>

@@ -1,0 +1,17 @@
+.prose {
+  max-width: 65ch;
+  font-size: 1.125rem;
+  line-height: 1.65;
+}
+.prose p {
+  max-width: none;
+}
+.prose h2 {
+  margin-top: var(--space-7);
+}
+.prose h3 {
+  margin-top: var(--space-6);
+}
+.prose a {
+  font-weight: 600;
+}

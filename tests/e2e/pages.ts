@@ -1,1 +1,1 @@
-export const PAGES = ['/', '/build/', '/communities/'];
+export const PAGES = ['/', '/build/', '/communities/', '/manifesto/'];
