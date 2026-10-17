@@ -1,0 +1,73 @@
+---
+import Section from '../Section.astro';
+import Kicker from '../Kicker.astro';
+import Status from '../Status.astro';
+
+// Sources: context-store/README.md (AES-256-GCM, Yjs), agent/README.md (model
+// overrides), spec/README.md (S-PAL), zkp/README.md (proofs). Statuses from status.ts.
+const steps = [
+  {
+    title: 'Your data stays home',
+    body: "Encrypted on your own devices, or on your community's server. Never in a datacentre you'll never see.",
+    status: ['context-store', 'multi-device-sync'],
+  },
+  {
+    title: 'Your AI, your choice',
+    body: 'An AI assistant that runs on hardware you or your community control. Pick the open model you want. It works for you and reports to no one.',
+    status: ['agent', 'bring-your-own-model'],
+  },
+  {
+    title: 'You set the terms',
+    body: 'When a service wants something, your rules decide what it gets. You can prove facts about yourself without handing over the details.',
+    status: ['spal-spec', 'zk-proofs'],
+  },
+];
+---
+
+<Section tone="clay-soft" grid id="how" labelledby="how-title">
+  <Kicker>How it works · Freehold, not leasehold</Kicker>
+  <h2 id="how-title">Sovereign by default.</h2>
+  <ol class="steps">
+    {steps.map((step, i) => (
+      <li>
+        <span class="num mono">0{i + 1}</span>
+        <h3>{step.title}</h3>
+        <p>{step.body}</p>
+        <ul class="statuses">
+          {step.status.map((id) => (
+            <li>
+              <Status id={id} showLabel />
+            </li>
+          ))}
+        </ul>
+      </li>
+    ))}
+  </ol>
+</Section>
+
+<style>
+  .steps {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+    gap: var(--space-6);
+    list-style: none;
+    margin: var(--space-6) 0 0;
+    padding: var(--space-5) 0 0;
+    border-top: 2px solid var(--ink);
+  }
+  .num {
+    display: inline-block;
+    background: var(--ink);
+    color: var(--chalk);
+    padding: 0.2rem 0.45rem;
+    margin-bottom: var(--space-3);
+  }
+  .statuses {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: var(--space-2);
+    font-size: 0.9rem;
+  }
+</style>

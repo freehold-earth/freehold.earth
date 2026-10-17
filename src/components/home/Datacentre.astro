@@ -1,0 +1,119 @@
+---
+import Section from '../Section.astro';
+import Kicker from '../Kicker.astro';
+
+interface Props {
+  heading?: 'h1' | 'h2';
+}
+const { heading: Heading = 'h2' } = Astro.props;
+
+// Argument adapted from Peter Wilson, "AI Growth Zones: gift horse or Trojan horse?" (2026).
+const rows = [
+  ['Who owns it', 'A distant company', 'Your library, co-op or neighbours'],
+  ['Where your data goes', 'Wherever they send it', "Nowhere you haven't agreed to"],
+  ['Where the money goes', 'Out of town', 'Stays local: running costs, local jobs'],
+  ['Who decides', 'Shareholders', 'Members'],
+];
+---
+
+<Section tone="soil" id="datacentre" labelledby="dc-title">
+  <Kicker>Community-owned compute</Kicker>
+  <Heading id="dc-title">The datacentre is yours.</Heading>
+  <p>
+    AI datacentres are arriving in towns that get the noise, the power bills and the water use,
+    while the value and the data flow somewhere else. Freehold turns that around. A node in your
+    library, co-op or village hall is a datacentre your community owns, runs and decides about.
+  </p>
+  <table>
+    <caption class="visually-hidden">Their datacentre compared with your community node</caption>
+    <thead>
+      <tr>
+        <td></td>
+        <th scope="col" class="mono">
+          Their datacentre
+        </th>
+        <th scope="col" class="mono ours">
+          Your community node
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      {rows.map(([k, theirs, ours]) => (
+        <tr>
+          <th scope="row" class="mono">
+            {k}
+          </th>
+          <td data-label="Their datacentre">{theirs}</td>
+          <td data-label="Your community node" class="ours">
+            {ours}
+          </td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+  <p class="pull">"Infrastructure can be renegotiated. Data, once extracted, is gone for good."</p>
+</Section>
+
+<style>
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: var(--space-6);
+  }
+  th,
+  td {
+    text-align: left;
+    padding: var(--space-3);
+    border-bottom: 1px solid rgb(246 239 228 / 20%);
+    vertical-align: top;
+  }
+  thead th {
+    border-bottom: 2px solid var(--chalk);
+  }
+  tbody th {
+    color: var(--sun-light);
+    font-size: 0.72rem;
+  }
+  .ours {
+    font-weight: 600;
+  }
+  thead .ours {
+    color: var(--sun-light);
+  }
+  .pull {
+    margin-top: var(--space-6);
+    font-size: clamp(1.4rem, 2vw + 0.8rem, 1.8rem);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+    color: var(--clay);
+    max-width: 36ch;
+  }
+  @media (max-width: 40rem) {
+    thead {
+      display: none;
+    }
+    tr,
+    th,
+    td {
+      display: block;
+    }
+    tr {
+      padding-block: var(--space-3);
+      border-bottom: 1px solid rgb(246 239 228 / 20%);
+    }
+    th,
+    td {
+      border: 0;
+      padding: var(--space-1) 0;
+    }
+    td::before {
+      content: attr(data-label) ': ';
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      opacity: 0.8;
+    }
+  }
+</style>

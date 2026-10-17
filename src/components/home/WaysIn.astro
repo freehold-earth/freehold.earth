@@ -1,0 +1,98 @@
+---
+import Section from '../Section.astro';
+import Kicker from '../Kicker.astro';
+import Button from '../Button.astro';
+import GatedCta from '../GatedCta.astro';
+import { REPO_URL, TALK_URL } from '../../data/site';
+---
+
+<Section tone="chalk" grid id="get-involved" labelledby="ways-title">
+  <Kicker>Get involved</Kicker>
+  <h2 id="ways-title">Three ways in. Pick yours.</h2>
+  <div class="cards">
+    <article class="card">
+      <p class="mono">For you</p>
+      <h3>Take your data back</h3>
+      <ul>
+        <li>
+          <a href="#see-it-work">See how it works</a>
+        </li>
+        <li>
+          <a href="/manifesto/">Read the manifesto</a>
+        </li>
+        <li>
+          <a href={REPO_URL}>Follow along on GitHub</a>
+        </li>
+      </ul>
+      <div class="cta">
+        <Button href="/manifesto/">Start here</Button>
+      </div>
+    </article>
+    <article class="card hi">
+      <p class="mono">For communities</p>
+      <h3>Host a node</h3>
+      <ul>
+        <li>Libraries, co-ops, clubs and families</li>
+        <li>One shared server, many members</li>
+        <li>Your community, your rules</li>
+      </ul>
+      <p class="talk">
+        <a href={TALK_URL}>Interested in hosting? Talk to us</a>
+      </p>
+      <div class="cta">
+        <GatedCta statusId="community-node-kit" href="/communities/">
+          Start a node
+        </GatedCta>
+      </div>
+    </article>
+    <article class="card">
+      <p class="mono">For builders</p>
+      <h3>Build with it</h3>
+      <ul>
+        <li>Open source, Apache-2.0</li>
+        <li>TypeScript and Python, runs on your machine</li>
+        <li>Spec and design decisions in the open</li>
+      </ul>
+      <div class="cta">
+        <Button href="/build/">Build with Freehold</Button>
+      </div>
+    </article>
+  </div>
+</Section>
+
+<style>
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+    gap: var(--space-4);
+    margin-top: var(--space-6);
+  }
+  .card {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    padding: var(--space-5);
+    border: 2px solid var(--ink);
+    background: rgb(255 255 255 / 40%);
+  }
+  .card.hi {
+    background: var(--clay);
+  }
+  .card p.mono,
+  .card h3 {
+    margin: 0;
+  }
+  ul {
+    margin: var(--space-2) 0;
+    padding-left: 1.1rem;
+    line-height: 1.7;
+  }
+  .talk {
+    margin: 0;
+    font-size: 0.95rem;
+  }
+  .cta {
+    margin-top: auto;
+    padding-top: var(--space-3);
+  }
+</style>

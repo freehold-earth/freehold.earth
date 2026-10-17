@@ -1,0 +1,23 @@
+---
+import Section from '../Section.astro';
+import Kicker from '../Kicker.astro';
+import Button from '../Button.astro';
+---
+
+<Section tone="sun" id="why-now" labelledby="why-title">
+  <Kicker>Why now</Kicker>
+  <h2 id="why-title" class="big">
+    The biggest AI companies want to hold your context and rent it back to you. The tools to keep it
+    yourself exist today. The window to make that normal is now.
+  </h2>
+  <Button href="/manifesto/">Read the manifesto</Button>
+</Section>
+
+<style>
+  .big {
+    font-size: clamp(1.5rem, 2.5vw + 0.8rem, 2.2rem);
+    line-height: 1.2;
+    max-width: 30ch;
+    margin-bottom: var(--space-6);
+  }
+</style>

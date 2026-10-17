@@ -18,10 +18,11 @@
     "test:dist": "vitest run tests/dist.test.ts --passWithNoTests",
     "e2e": "playwright test",
     "emdash": "node scripts/check-emdash.mjs src public DESIGN.md .claude dist",
-    "links": "linkinator dist --recurse --skip \"^https?://(?!localhost)\"",
+    "links": "linkinator dist --recurse --skip \"^https://\"",
     "check:sources": "node scripts/check-sources.mjs",
     "verify": "pnpm lint && pnpm typecheck && pnpm test && pnpm build && pnpm test:dist && pnpm emdash && pnpm links && pnpm e2e",
-    "shots": "node scripts/screenshots.mjs"
+    "shots": "node scripts/screenshots.mjs",
+    "links:external": "linkinator dist --recurse"
   },
   "dependencies": {
     "astro": "^7.4.0"

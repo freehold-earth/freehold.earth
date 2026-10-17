@@ -1,0 +1,52 @@
+---
+import Section from '../Section.astro';
+import Kicker from '../Kicker.astro';
+import Button from '../Button.astro';
+import { getStatus, STATE_LABEL } from '../../data/status';
+import { REPO_URL } from '../../data/site';
+
+// Source: demo/README.md ("Prove 'user is >= 21' without revealing actual birth date"),
+// zkp/README.md (placeholder proofs off-mainnet), tag:demo-v0.1.0.
+const demo = getStatus('age-proof-demo');
+---
+
+<Section tone="ink" id="see-it-work" labelledby="real-title">
+  <div class="cols">
+    <div>
+      <Kicker>{STATE_LABEL[demo.state]} · v0.1</Kicker>
+      <h2 id="real-title">Prove you're over 21. Keep your birthday.</h2>
+      <p>
+        A shop asks for your age. Instead of a photo of your ID, your device answers with a proof
+        that says "yes, over 21" and nothing else.
+      </p>
+      <p class="note">
+        Developers can run this flow today in the Freehold demo. The developer preview runs on a
+        local test setup, so some steps, like generating the proof, are simulated.
+      </p>
+      <div class="ctas">
+        <Button href={`${REPO_URL}/tree/main/demo`} variant="on-dark">
+          Run it locally
+        </Button>
+      </div>
+    </div>
+    <div id="walkthrough" class="walkthrough-slot">
+      <slot />
+    </div>
+  </div>
+</Section>
+
+<style>
+  .cols {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
+    gap: var(--space-7);
+    align-items: start;
+  }
+  .note {
+    font-size: 0.95rem;
+    opacity: 0.85;
+  }
+  .ctas {
+    margin-top: var(--space-5);
+  }
+</style>

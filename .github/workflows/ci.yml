@@ -23,3 +23,6 @@ jobs:
         continue-on-error: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: External links
+        run: pnpm links:external
+        continue-on-error: true

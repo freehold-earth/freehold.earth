@@ -1,0 +1,124 @@
+---
+import Section from '../Section.astro';
+import Kicker from '../Kicker.astro';
+import { byState, STATE_LABEL, type StatusState } from '../../data/status';
+
+const columns: StatusState[] = ['preview', 'in-development', 'planned'];
+// Precedents from docs/concepts/manifesto.md references; inspiration, not partners.
+const precedents = [
+  {
+    name: 'Guifi.net',
+    href: 'https://guifi.net/en',
+    text: 'A community-built network with tens of thousands of nodes, Catalonia',
+  },
+  {
+    name: 'El Servidor del Barri',
+    href: null,
+    text: 'A neighbourhood server for email, files and calendars, Barcelona',
+  },
+  {
+    name: 'Community Box',
+    href: 'https://www.bbc.co.uk/news/articles/c0rpy7envr5o',
+    text: 'Local cloud services for rural communities, UK',
+  },
+];
+---
+
+<Section tone="moss" id="status" labelledby="status-title">
+  <Kicker>Where it's at</Kicker>
+  <h2 id="status-title">Built in the open. Here is where it's at.</h2>
+  <div class="board">
+    {columns.map((state) => (
+      <div class="col">
+        <p class="mono tag" data-state={state}>
+          {STATE_LABEL[state]}
+        </p>
+        <ul>
+          {byState(state).map((item) =>
+            item.link ? (
+              <li>
+                <a href={item.link}>{item.label}</a>
+              </li>
+            ) : (
+              <li>{item.label}</li>
+            ),
+          )}
+        </ul>
+      </div>
+    ))}
+  </div>
+  <p class="small">
+    Developer preview means a developer can run it from the repo today. Nothing here is ready for
+    everyday use yet.
+  </p>
+  <div class="precedents">
+    <p class="mono kick">People already run their own infrastructure</p>
+    <ul>
+      {precedents.map((p) => (
+        <li>
+          <strong>{p.href ? <a href={p.href}>{p.name}</a> : p.name}</strong>
+          <span>{p.text}</span>
+        </li>
+      ))}
+    </ul>
+    <p class="small">These projects inspire Freehold. They are not affiliated with it.</p>
+  </div>
+</Section>
+
+<style>
+  .board {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+    gap: var(--space-5);
+    margin-top: var(--space-5);
+  }
+  .col {
+    border-top: 2px solid var(--chalk);
+    padding-top: var(--space-3);
+  }
+  .tag {
+    display: inline-block;
+    padding: 0.15rem 0.45rem;
+    margin: 0 0 var(--space-2);
+    border: 1.5px solid var(--chalk);
+  }
+  .tag[data-state='preview'] {
+    background: #b9dfa8;
+    border-color: #b9dfa8;
+    color: var(--ink);
+  }
+  .tag[data-state='in-development'] {
+    background: var(--sun);
+    border-color: var(--sun);
+    color: var(--ink);
+  }
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    line-height: 1.8;
+  }
+  .small {
+    font-size: 0.9rem;
+    opacity: 0.9;
+    margin-top: var(--space-5);
+  }
+  .precedents {
+    margin-top: var(--space-6);
+    padding-top: var(--space-5);
+    border-top: 1.5px solid rgb(246 239 228 / 30%);
+  }
+  .kick {
+    color: var(--sun-light);
+  }
+  .precedents ul {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+    gap: var(--space-4);
+  }
+  .precedents li {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.5;
+  }
+</style>

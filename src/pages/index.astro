@@ -1,17 +1,23 @@
 ---
 import Base from '../layouts/Base.astro';
-import Section from '../components/Section.astro';
-import Button from '../components/Button.astro';
-import Kicker from '../components/Kicker.astro';
+import Hero from '../components/home/Hero.astro';
+import HowItWorks from '../components/home/HowItWorks.astro';
+import ItsReal from '../components/home/ItsReal.astro';
+import Datacentre from '../components/home/Datacentre.astro';
+import WaysIn from '../components/home/WaysIn.astro';
+import BuiltInOpen from '../components/home/BuiltInOpen.astro';
+import WhyNow from '../components/home/WhyNow.astro';
 ---
 
 <Base
   title="Freehold"
-  description="Your data, your rules, your community. Freehold is open source, local-first infrastructure for data sovereignty."
+  description="Your data, your rules, your community. Freehold is open source, local-first infrastructure that keeps your data and your AI on hardware you or your community own."
 >
-  <Section tone="clay" grid>
-    <Kicker>Freehold, not leasehold</Kicker>
-    <h1>Your data. Your rules. Your community.</h1>
-    <Button href="/build/">I'm a builder</Button>
-  </Section>
+  <Hero />
+  <HowItWorks />
+  <ItsReal />
+  <Datacentre />
+  <WaysIn />
+  <BuiltInOpen />
+  <WhyNow />
 </Base>
