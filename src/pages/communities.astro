@@ -1,11 +1,264 @@
 ---
 import Base from '../layouts/Base.astro';
 import Section from '../components/Section.astro';
+import Kicker from '../components/Kicker.astro';
+import Button from '../components/Button.astro';
+import Status from '../components/Status.astro';
+import Datacentre from '../components/home/Datacentre.astro';
+import { REPO_URL, TALK_URL } from '../data/site';
+
+// Sources: docs/decisions/004-infrastructure-philosophy.md (tiers, principles),
+// docs/concepts/manifesto.md (community cloud, economics table),
+// docs/concepts/executive-brief.md (costs). Figures are the docs' own estimates.
+const tiers = [
+  [
+    'Your devices',
+    'Your phone, laptop or home server.',
+    'Most sovereign. Limited by your hardware.',
+  ],
+  [
+    'Family and friends',
+    "A small box at a trusted relative or friend's house.",
+    'High trust, informal rules.',
+  ],
+  [
+    'Your community',
+    'A library, co-op or community centre.',
+    'Shared costs, local accountability, agreed rules.',
+  ],
+  [
+    'A federation',
+    'Regional co-ops or a municipal service, run under community governance.',
+    'Economies of scale, still accountable.',
+  ],
+  [
+    'Commercial cloud',
+    'Only as a last resort, and only if your rules allow it.',
+    'Convenient, at a cost to sovereignty.',
+  ],
+];
+
+const hosts = [
+  [
+    'Libraries',
+    'Already trusted, already offer free internet access. Data sovereignty is a natural next service.',
+  ],
+  ['Co-ops and credit unions', 'Member-owned by design. A node is a member benefit.'],
+  ['Clubs, faith groups and associations', 'Existing trust networks, existing governance.'],
+  ['Families and friends', 'One small server, shared between people who already trust each other.'],
+];
 ---
 
-<Base title="Communities" description="Communities, Freehold.">
-  <Section tone="chalk">
-    <h1>Communities</h1>
-    <p>This page is being written.</p>
+<Base
+  title="Communities"
+  description="A Freehold community node is a datacentre your library, co-op or village hall owns, runs and decides about. Your data stays local, the value stays local."
+>
+  <Datacentre heading="h1" />
+
+  <Section tone="chalk" grid labelledby="what-heading">
+    <Kicker>What is a community node?</Kicker>
+    <h2 id="what-heading">Nobody should have to run a server alone.</h2>
+    <p>
+      Running your own server is too much to ask of most people. Handing everything to a big tech
+      company defeats the point. A community node sits in between: one shared machine, run by people
+      you know, that holds your encrypted data and runs AI for its members.
+    </p>
+    <p>
+      Freehold is designed so your data is encrypted before it reaches that machine, so the people
+      running it cannot read it. Your rules still decide what leaves it.
+    </p>
+    <ul class="hosts">
+      {hosts.map(([who, why]) => (
+        <li>
+          <h3>{who}</h3>
+          <p>{why}</p>
+        </li>
+      ))}
+    </ul>
+  </Section>
+
+  <Section tone="clay-soft" grid labelledby="tiers-heading">
+    <Kicker>From your phone to your town</Kicker>
+    <h2 id="tiers-heading">Run it where it makes sense.</h2>
+    <p>
+      Freehold works at every scale. You choose, and your rules can say which of these may handle
+      which parts of your data.
+    </p>
+    <ol class="tiers">
+      {tiers.map(([name, what, trade], i) => (
+        <li>
+          <span class="mono num">0{i}</span>
+          <div>
+            <h3>{name}</h3>
+            <p>{what}</p>
+            <p class="trade">{trade}</p>
+          </div>
+        </li>
+      ))}
+    </ol>
+  </Section>
+
+  <Section tone="ink" labelledby="cost-heading">
+    <Kicker>What it costs</Kicker>
+    <h2 id="cost-heading">Shared costs, kept local.</h2>
+    <p>
+      Running costs are shared between members, and the money stays in the community: hardware,
+      power and a local operator rather than a distant company's profits.
+    </p>
+    <dl class="costs">
+      <div data-cost>
+        <dt class="mono">Your own devices</dt>
+        <dd>Free (estimate)</dd>
+      </div>
+      <div data-cost>
+        <dt class="mono">Family node</dt>
+        <dd>About $20 a month, shared (estimate)</dd>
+      </div>
+      <div data-cost>
+        <dt class="mono">Community node</dt>
+        <dd>About $10 per member a month (estimate)</dd>
+      </div>
+      <div data-cost>
+        <dt class="mono">100 members</dt>
+        <dd>About $1,000 a month, covering hardware and a part-time operator (estimate)</dd>
+      </div>
+    </dl>
+    <p class="small">
+      Estimates from the project's own planning documents. Real costs will depend on hardware, power
+      and local wages.
+    </p>
+  </Section>
+
+  <Section tone="moss" labelledby="status-heading">
+    <Kicker>Where it's at</Kicker>
+    <h2 id="status-heading">Be one of the first.</h2>
+    <p>
+      There is no ready-made community node kit yet. Today a developer can run every part of
+      Freehold on their own machine. Making it easy for a library or co-op to run is the next big
+      step, and we want to build it with the first communities, not for them.
+    </p>
+    <ul class="statuses">
+      <li>
+        <Status id="community-node-kit" showLabel />
+      </li>
+      <li>
+        <Status id="one-click-install" showLabel />
+      </li>
+      <li>
+        <Status id="compute-locality" showLabel />
+      </li>
+    </ul>
+    <div class="ctas">
+      <Button href={TALK_URL} variant="on-dark">
+        Interested in hosting? Talk to us
+      </Button>
+      <Button href={REPO_URL} variant="on-dark">
+        Follow along on GitHub
+      </Button>
+    </div>
+  </Section>
+
+  <Section tone="chalk" labelledby="prec-heading">
+    <Kicker>People already doing this</Kicker>
+    <h2 id="prec-heading">Community infrastructure already works.</h2>
+    <ul class="prec">
+      <li>
+        <h3>
+          <a href="https://guifi.net/en">Guifi.net</a>
+        </h3>
+        <p>A community-built network in Catalonia with tens of thousands of nodes.</p>
+      </li>
+      <li>
+        <h3>El Servidor del Barri</h3>
+        <p>A neighbourhood server in Barcelona running email, files, passwords and calendars.</p>
+      </li>
+      <li>
+        <h3>
+          <a href="https://www.bbc.co.uk/news/articles/c0rpy7envr5o">Community Box</a>
+        </h3>
+        <p>Local cloud services for rural communities in the UK.</p>
+      </li>
+    </ul>
+    <p class="small">These projects inspire Freehold. They are not affiliated with it.</p>
   </Section>
 </Base>
+
+<style>
+  .hosts,
+  .prec {
+    list-style: none;
+    padding: 0;
+    margin: var(--space-6) 0 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+    gap: var(--space-5);
+  }
+  .hosts li,
+  .prec li {
+    border-top: 2px solid var(--ink);
+    padding-top: var(--space-3);
+  }
+  .tiers {
+    list-style: none;
+    padding: 0;
+    margin: var(--space-6) 0 0;
+    border-top: 2px solid var(--ink);
+  }
+  .tiers li {
+    display: flex;
+    gap: var(--space-4);
+    padding: var(--space-4) 0;
+    border-bottom: 1px solid rgb(31 26 22 / 25%);
+  }
+  .tiers h3,
+  .tiers p {
+    margin: 0 0 var(--space-1);
+  }
+  .num {
+    flex: none;
+    align-self: flex-start;
+    background: var(--ink);
+    color: var(--chalk);
+    padding: 0.2rem 0.45rem;
+  }
+  .trade {
+    font-size: 0.95rem;
+    opacity: 0.85;
+  }
+  .costs {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+    gap: var(--space-5);
+    margin: var(--space-6) 0 0;
+  }
+  .costs div {
+    border-top: 2px solid var(--chalk);
+    padding-top: var(--space-3);
+  }
+  .costs dt {
+    color: var(--sun-light);
+    margin-bottom: var(--space-2);
+  }
+  .costs dd {
+    margin: 0;
+    font-size: 1.1rem;
+    font-weight: 600;
+  }
+  .small {
+    font-size: 0.9rem;
+    opacity: 0.85;
+    margin-top: var(--space-5);
+  }
+  .statuses {
+    list-style: none;
+    padding: 0;
+    margin: var(--space-5) 0;
+    display: grid;
+    gap: var(--space-2);
+  }
+  .ctas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+  }
+</style>
