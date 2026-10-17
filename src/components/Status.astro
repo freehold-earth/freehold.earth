@@ -1,0 +1,43 @@
+---
+import { getStatus, STATE_LABEL } from '../data/status';
+
+interface Props {
+  id: string;
+  showLabel?: boolean;
+}
+const { id, showLabel = false } = Astro.props;
+const item = getStatus(id);
+---
+
+<span class="status-wrap">
+  {showLabel && <span class="item">{item.label}</span>}
+  <span class="mono tag" data-state={item.state}>
+    {STATE_LABEL[item.state]}
+  </span>
+</span>
+
+<style>
+  .status-wrap {
+    display: inline-flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-2);
+  }
+  .tag {
+    display: inline-block;
+    padding: 0.15rem 0.45rem;
+    font-size: 0.7rem;
+    border: 1.5px solid currentColor;
+    white-space: nowrap;
+  }
+  .tag[data-state='preview'] {
+    background: #b9dfa8;
+    border-color: #b9dfa8;
+    color: var(--ink);
+  }
+  .tag[data-state='in-development'] {
+    background: var(--sun);
+    border-color: var(--sun);
+    color: var(--ink);
+  }
+</style>

@@ -1,0 +1,37 @@
+---
+import Button from './Button.astro';
+import { getStatus } from '../data/status';
+import { REPO_URL } from '../data/site';
+import type { ButtonVariant } from './types';
+
+interface Props {
+  statusId: string;
+  href: string;
+  variant?: ButtonVariant;
+}
+const { statusId, href, variant = 'primary' } = Astro.props;
+const live = getStatus(statusId).state === 'preview';
+const secondary: ButtonVariant = variant === 'on-dark' ? 'on-dark' : 'secondary';
+---
+
+{live ? (
+  <Button href={href} variant={variant}>
+    <slot />
+  </Button>
+) : (
+  <span class="gated" data-gated="true">
+    <span class="mono soon">Coming soon</span>
+    <Button href={REPO_URL} variant={secondary} external>
+      Watch on GitHub
+    </Button>
+  </span>
+)}
+
+<style>
+  .gated {
+    display: inline-flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-3);
+  }
+</style>
