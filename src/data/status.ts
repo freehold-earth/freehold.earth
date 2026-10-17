@@ -85,6 +85,32 @@ export const STATUS: readonly StatusItem[] = [
     link: `${TREE}/identity`,
   },
   {
+    id: 'one-time-ids',
+    label: 'One-time identities',
+    state: 'preview',
+    source: 'identity/src/did.ts',
+    link: `${TREE}/identity`,
+  },
+  {
+    id: 'authorisation-records',
+    label: 'Prove it was you, when you choose',
+    state: 'preview',
+    source: 'identity/src/did.ts',
+    link: `${TREE}/identity`,
+  },
+  {
+    id: 'shielded-funding',
+    label: 'Untraceable funding for one-time IDs',
+    state: 'in-development',
+    source: 'identity/src/funding.ts',
+  },
+  {
+    id: 'link-proof',
+    label: 'Prove it was you without revealing who you are',
+    state: 'planned',
+    source: 'docs/concepts/identity-privacy-model.md',
+  },
+  {
     id: 'identity-passport',
     label: 'Verified identity credentials',
     state: 'planned',

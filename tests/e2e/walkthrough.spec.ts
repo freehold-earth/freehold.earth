@@ -35,7 +35,7 @@ test.describe('age-proof walkthrough', () => {
   test('final step shows what the shop receives', async ({ page }) => {
     await page.goto('/');
     const last = steps(page).nth(3);
-    for (const text of ['Over 21', 'Date of birth', 'Name', 'not shared']) {
+    for (const text of ['Over 21', 'Date of birth', 'Name', 'not shared', 'one-time ID']) {
       await expect(last).toContainText(text);
     }
   });

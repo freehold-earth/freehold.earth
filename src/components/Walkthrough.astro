@@ -1,5 +1,6 @@
 ---
-// Illustration of the demo flow. Source: demo/README.md "Request Flow":
+// Illustration of the demo flow. Sources: demo/README.md "Request Flow", and
+// demo/apps/user-app/src/App.tsx (a fresh ephemeral DID per verification):
 // the business asks for age >= 21, the user approves, the agent reads the birth
 // date from the encrypted context store, the ZKP service returns a proof, and
 // the business sees "Verified (ageOver: 21)". Works as a static list without JS.
@@ -8,6 +9,7 @@ const received = [
   ['Date of birth', 'not shared', false],
   ['Name', 'not shared', false],
   ['Address', 'not shared', false],
+  ['Can it track you?', 'No: a one-time ID, new every time', true],
 ] as const;
 ---
 
@@ -44,8 +46,8 @@ const received = [
         ))}
       </dl>
       <p class="later">
-        In the full design, your rules can also require the shop to keep nothing and stop it
-        recognising you next time. That part is planned.
+        In the full design, your rules can also require the shop to keep nothing. That part is
+        planned.
       </p>
     </li>
   </ol>

@@ -54,8 +54,15 @@ const layers = [
     dir: 'identity',
     title: 'Identity',
     stack: 'TypeScript · W3C DIDs',
-    body: 'Self-owned identifiers using the did:key method, including single-use identities so services cannot link your visits. Midnight Passport is the planned path for identity anchoring and credentials.',
-    status: ['identity-didkey', 'identity-passport'],
+    body: 'You hold one root identity (did:key), encrypted on your device and never shown to services. Every interaction uses a fresh one-time identity, so services cannot link your visits or build a shadow profile. Each one-time identity has a private authorisation record signed by your root, so you can prove it was you when you choose. Midnight Passport is the planned path for anchoring and credentials.',
+    status: [
+      'identity-didkey',
+      'one-time-ids',
+      'authorisation-records',
+      'shielded-funding',
+      'link-proof',
+      'identity-passport',
+    ],
   },
 ];
 

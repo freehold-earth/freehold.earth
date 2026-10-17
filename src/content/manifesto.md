@@ -30,6 +30,8 @@ Capable open AI models now run on ordinary laptops, and they are reaching phones
 
 When a service wants something from you, your rules decide what it gets. Freehold describes those rules in an open, machine-readable policy language, with the working name S-PAL: what may be shared, with whom, for how long, and for what purpose.
 
+Every time you deal with a service, Freehold uses a fresh one-time identity, so services cannot follow you around or quietly build a profile of you. Only you hold the link back to your real identity, and you can prove a one-time identity was yours if you ever need to.
+
 Often a service does not need your data at all, only a fact about it. A shop needs to know you are over 21, not your date of birth. With zero-knowledge proofs your device can prove the fact and reveal nothing else. Where rules need to be enforced beyond your own device, Freehold uses public cryptographic networks as an anchor, never as a home: your data does not live there, and your life does not stop if a network has a bad day.
 
 ## The datacentre is yours
