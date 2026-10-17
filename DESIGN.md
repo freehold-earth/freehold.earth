@@ -26,7 +26,7 @@ Tokens live in `src/styles/tokens.css`. Always use tokens, never raw hex values 
 | `--ink`       | `#1f1a16` | Text, primary buttons, dark sections                                 |
 | `--soil`      | `#2b2420` | Dark argument sections. Chalk on soil 13.36:1, clay on soil 4.62:1   |
 | `--chalk`     | `#f6efe4` | Light background, text on dark                                       |
-| `--sand`      | `#efd3c1` | Manifesto intro. Ink on sand 12.12:1                                 |
+| `--sage`      | `#aebf9c` | Manifesto intro, a washed-out moss. Ink on sage 8.81:1               |
 | `--moss`      | `#3f5a3a` | Status section. Chalk on moss 6.72:1                                 |
 | `--sun`       | `#e8b04a` | Warm highlight sections (ink on sun 8.82:1); large text on moss only |
 | `--sun-light` | `#f3cf80` | Small labels on moss, soil and ink (5.14:1 on moss)                  |
@@ -53,7 +53,7 @@ Light theme only. The palette is the brand.
 Every page follows the same rhythm, so differences between pages are intentional and nothing feels accidental.
 
 1. **Intro (`PageHero`)**: same structure, spacing and height on every page (`--hero-height`), top-aligned so the tagline and title never move. This is where pages differ on purpose: each page has its own warm intro tone, and the header takes the same tone (`Base` `tone` prop must match `PageHero` `tone`).
-   - Home: `clay` · Communities: `sun` · Build: `clay-soft` · Manifesto: `sand` · 404: `clay`
+   - Home: `clay` · Communities: `sun` · Build: `clay-soft` · Manifesto: `sage` · 404: `clay`
 2. **Body**: light sections are always `chalk` with the plot grid (`Section` adds the grid automatically). Dark sections (`ink`, `soil`) are for contrast and arguments.
 3. **Ending**: every page ends with the green status section (`BuiltInOpen` or a page-specific `moss` section) and then the yellow call to action (`CallToAction` or a `sun` section), before the footer.
 

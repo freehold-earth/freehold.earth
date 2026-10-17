@@ -42,6 +42,8 @@ test('each page has its own intro colour, shared with its header', async ({ page
     colours.push(hero.bg);
   }
   expect(new Set(colours).size).toBe(PAGES.length);
+  // Manifesto uses the deeper sage chosen by the owner.
+  expect(colours[3]).toBe('rgb(174, 191, 156)');
 });
 
 test('every page ends with the green status section, then the yellow call to action', async ({
